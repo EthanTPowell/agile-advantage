@@ -1,0 +1,7 @@
+{
+  "name": "agile-advantage",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
