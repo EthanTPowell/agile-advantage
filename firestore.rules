@@ -1,0 +1,70 @@
+// rules_version = '2';
+// service cloud.firestore {
+//   match /databases/{database}/documents {
+//     match /{document=**} {
+//       allow read, write: if false;
+//     }
+//   }
+// }
+
+rules_version = '2'
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow the user to access documents in the "cities" collection
+    // only if they are authenticated.
+    // match /users/{uid} {
+    // 	allow read, update, delete: if request.auth.uid != uid;
+    //   allow create: if request.auth.uid != null;
+    // }
+    // match /users/{uid} {
+    // 	allow read, write: if request.auth.uid == uid
+    // }
+    
+    match /users/{userId} {
+      allow read: if request.auth.uid != null;
+      allow create: if request.auth.uid != null;
+      allow write: if request.auth.uid != null;
+      allow update: if request.auth.uid != null;
+    }
+    match /appSettings/{id} {
+      allow read;
+      allow create: if request.auth.uid != null;
+      allow write: if request.auth.uid != null;
+      allow update: if request.auth.uid != null;
+    }    
+    match /support-tickets/{id} {
+      allow read;
+      allow create: if request.auth.uid != null;
+      allow write: if request.auth.uid != null;
+      allow update: if request.auth.uid != null;
+    }    
+    match /support-tickets-posts/{id} {
+      allow read;
+      allow create: if request.auth.uid != null;
+      allow write: if request.auth.uid != null;
+      allow update: if request.auth.uid != null;
+    }    
+    match /projects/{id} {
+      allow read;
+      allow create: if request.auth.uid != null;
+      allow write: if request.auth.uid != null;
+      allow update: if request.auth.uid != null;
+    }    
+    match /epics/{id} {
+      allow read;
+      allow create: if request.auth.uid != null;
+      allow write: if request.auth.uid != null;
+      allow update: if request.auth.uid != null;
+    }    
+    match /support-time-log/{id} {
+      allow read;
+      allow create: if request.auth.uid != null;
+      allow write: if request.auth.uid != null;
+      allow update: if request.auth.uid != null;
+    }    
+
+	match /{document=**} {
+      allow read, write: if request.auth.uid != null;
+    }
+  }
+}
