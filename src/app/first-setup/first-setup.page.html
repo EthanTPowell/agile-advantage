@@ -1,0 +1,214 @@
+
+<ion-content no-padding>
+    <!-- <ejs-sidebar
+    id="default-sidebar"
+    class="sidebar w-600p"
+    #sidebar
+    [type]='type'
+    [position]='position'
+    [showBackdrop]="showBackdrop"
+    [enablePersistence]='enablePersistence'
+    (created)="onCreated($event)"
+    style="visibility: hidden"
+    > -->
+    <ejs-sidebar
+        id="default-sidebar"
+        class="sidebar w-600p bg-light"
+        #sidebar
+        [position]='position'
+        [showBackdrop]="showBackdrop"
+        (created)="onCreated($event)"
+        style="visibility: hidden"
+    >
+    <div class="font-24 font-w-500 primary-color text-center m-3">Add a Project</div>
+    <form
+        [formGroup]="submitForm"
+        (submit)="onSubmit()"
+    >
+        <ion-card>
+            <ion-card-content>
+                <div class="area">
+                    <ion-item>
+                        <ion-label position="stacked">Project Name</ion-label>
+                        <ion-input
+                            type="text"
+                            formControlName="name"
+                            [(ngModel)]="project.name"
+                            name="name"
+                            autocomplete="name"
+                            placeholder="Give your project a name"
+                        >
+                        </ion-input>
+                    </ion-item>
+                    <div class="error-messages">
+                        <ng-container *ngFor="let error of error_messages.name">
+                            <div
+                                class="error-message"
+                                *ngIf="submitForm.get('name').hasError(error.type) && (submitForm.get('name').dirty || submitForm.get('name').touched)"
+                            >
+                                {{ error.message }}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <ion-item>
+                        <ion-label position="stacked">Description</ion-label>
+                        <ion-textarea
+                            type="text"
+                            rows="4"
+                            formControlName="description"
+                            [(ngModel)]="project.description"
+                            name="description"
+                            autocomplete="description"
+                            placeholder="Write your description"
+                        >
+                        </ion-textarea>
+                    </ion-item>
+                    <div class="error-messages">
+                        <ng-container *ngFor="let error of error_messages.description">
+                            <div
+                                class="error-message"
+                                *ngIf="submitForm.get('description').hasError(error.type) && (submitForm.get('description').dirty || submitForm.get('description').touched)"
+                            >
+                                {{ error.message }}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <ion-item
+                        button
+                        detail="true"
+                        (click)="selectDeveloper()"
+                        detail-icon="caret-down"
+                    >
+                        <ion-label>
+                            <h3 class="font-12">Set the project Owner</h3>
+                            <p
+                                class="mt-2 mb-2 font-16"
+                                [ngClass]="getCssStatus(project.ownerId)"
+                            >
+                                {{ project.ownerId }}
+                            </p>
+                        </ion-label>
+                    </ion-item>
+                    <div class="spacer-1"></div>
+                </div>
+    
+                <ion-row>
+                    <ion-col size="10">
+                        <div>
+                            Tap on the action button to add an image.
+                        </div>
+                    </ion-col>
+                    <ion-col size="2">
+                        <ion-button
+                            class="mr-3"
+                            (click)="insertImage()"
+                        >
+                            <ion-icon
+                                slot="icon-only"
+                                name="camera"
+                            ></ion-icon>
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <div *ngIf="url">
+                        <div id='element'>
+                            <span class="e-avatar e-avatar-xlarge">
+                                <img
+                                    [src]="url"
+                                    alt="image"
+                                    (click)="showImage(url)"
+                                >
+                            </span>
+                        </div>
+                    </div>
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
+        <ion-row>
+            <ion-col
+                size="6"
+                size-sm="6"
+                size-md="6"
+                size-lg="6"
+                size-xl="6"
+            >
+                <ion-button
+                    class="button button-block"
+                    shape="round"
+                    fill="outline"
+                    expand="full"
+                    color="primary"
+                    (click)="cancel()"
+                >
+                    Cancel
+                </ion-button>
+            </ion-col>
+            <ion-col
+                size="6"
+                size-sm="6"
+                size-md="6"
+                size-lg="6"
+                size-xl="6"
+            >
+                <ion-button
+                    class="button button-block"
+                    type="submit"
+                    [disabled]="!submitForm.valid"
+                    shape="round"
+                    expand="full"
+                    color="primary"
+                >
+                    Save
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </form>
+    
+    </ejs-sidebar>
+
+    <div class="main">
+        <ion-card
+            no-margin
+            class="card w-400p-center"
+        >
+            <ion-card-header>
+                <ion-row class="row">
+                    <div class="davesa-logo">
+                        <img
+                            src="assets/first-setup/screen-1.jpg"
+                            class="davesa-logo"
+                            alt="davesa"
+                        >
+                    </div>
+                </ion-row>
+            </ion-card-header>
+            <ion-card-content>
+                <ion-button
+                    class="button button-block"
+                    shape="round"
+                    (click)="toggleClick()"
+                >
+                    <ion-icon
+                        slot="icon-only"
+                        name="add"
+                    ></ion-icon>
+                    Create Project
+                </ion-button>
+            </ion-card-content>
+        </ion-card>
+    </div>
+</ion-content>
+
+<!-- <ion-fab
+    vertical="bottom"
+    horizontal="center"
+    slot="fixed"
+>
+    <ion-fab-button
+        (click)="addProject()"
+        data-desc="Add Project"
+    >
+        <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+</ion-fab>-->

@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Edit User</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="container">
+  <ion-card class="content" *ngIf="user">
+    <ion-card-header>
+      <ion-card-title>{{ user.firstName }} {{ user.lastName }}</ion-card-title>
+      <div>{{ user.email }}</div>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="submitForm" (submit)="onSubmit()">
+        <ion-list>
+          <!-- <ion-item>
+            <ion-label>Active User</ion-label>
+            <ion-toggle
+              [(ngModel)]="user.activeUser"
+              formControlName="activeUser"
+            ></ion-toggle>
+          </ion-item> -->
+          <ion-item>
+            <ion-label>Super Admin</ion-label>
+            <ion-toggle
+              [(ngModel)]="user.superAdmin"
+              formControlName="superAdmin"
+            ></ion-toggle>
+          </ion-item>
+          <ion-item>
+            <ion-label>Developer</ion-label>
+            <ion-toggle
+              [(ngModel)]="user.developer"
+              formControlName="developer"
+            ></ion-toggle>
+          </ion-item>
+        </ion-list>
+        <ion-row class="buttons">
+          <ion-col col-2>
+            <ion-button
+              shape="round"
+              type="submit"
+              [disabled]="!submitForm.valid"
+            >
+              Submit
+            </ion-button>
+          </ion-col>
+          <ion-col col-2>
+            <ion-button shape="round" (click)="cancel()"> Cancel </ion-button>
+          </ion-col>
+        </ion-row>
+      </form></ion-card-content
+    >
+  </ion-card>
+</ion-content>

@@ -1,0 +1,38 @@
+<ion-card>
+  <ejs-grid
+    #grid
+    [dataSource]="data"
+    [editSettings]="editSettings"
+    [toolbar]="toolbar"
+    [allowPaging]="true"
+    [allowGrouping]="true"
+    [pageSettings]="pageSettings"
+    height="100%"
+    (rowSelected)="openProjectItem($event)"
+  >
+    <e-columns>
+      <e-column field="Id" headerText="ID" width="100"> </e-column>
+      <e-column field="Summary" headerText="Item Name" width="150"> </e-column>
+      <e-column field="Status" headerText="Status" width="100"> </e-column>
+      <e-column field="Type" headerText="Type" width="100">
+        <ng-template #template #editTemplate let-data>
+          <div [ngClass]="getCssType(data.Type)">{{ data.Type }}</div>
+        </ng-template>
+      </e-column>
+      <e-column field="Priority" headerText="Priority" width="100">
+        <ng-template #template #editTemplate let-data>
+          <div [ngClass]="getCssPriority(data.Priority)">
+            {{ data.Priority }}
+          </div>
+        </ng-template>
+      </e-column>
+      <e-column field="Epic" headerText="Epic" width="100"> </e-column>
+      <e-column field="Assignee" headerText="Assignee" width="100"> </e-column>
+      <e-column field="created_at" headerText="Created" width="100">
+        <ng-template #template #editTemplate let-data>
+          {{ data.created_at | timeAgo }}
+        </ng-template>
+      </e-column>
+    </e-columns>
+  </ejs-grid>
+</ion-card>

@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-title>
+        Edit post 
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-card>
+    <ion-card-header color="secondary">
+          {{projectItemPost.title}}
+    </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+          {{projectItemPost.message}}
+        </ion-item>
+        <ion-item *ngIf="images.length > 0">
+          <div *ngFor="let image of images">
+              <ion-thumbnail>
+                <img [src]="image" alt="image" (click)="showImage(image)">
+              </ion-thumbnail>  
+              <ion-icon 
+              slot="end"         
+              src="assets/svg/icons/eye.svg"
+              slot="icon-only"
+              (click)="showImage(image)"></ion-icon>
+          </div>
+        </ion-item> 
+        </ion-card-content>
+      </ion-card>
+  </ion-content>

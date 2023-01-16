@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-title>
+        Edit post 
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+    <ion-content>
+  <form
+  [formGroup]="submitForm"
+   (submit)="onSubmit()"
+  >
+  <ion-card>
+  
+  
+  <div class="bg-light">
+    <ion-item>
+      <ion-label position="stacked"> Post Title </ion-label>
+      <ion-input type="text" formControlName="postTitle" [(ngModel)]="projectItemPost.title"  name="postTitle" placeholder="Title">
+      </ion-input>
+    </ion-item>
+    <div class="error-messages">
+      <ng-container *ngFor="let error of error_messages.postTitle">
+        <div class="error-message"
+          *ngIf="submitForm.get('postTitle').hasError(error.type) && (submitForm.get('postTitle').dirty || submitForm.get('postTitle').touched)">
+          {{ error.message }}
+        </div>
+      </ng-container>
+    </div>
+  
+      <ion-item>
+        <ion-label position="stacked"> Post Message </ion-label>
+        <ion-input type="text" formControlName="postMessage" [(ngModel)]="projectItemPost.message"  name="postMessage" placeholder="Post message">
+        </ion-input>
+      </ion-item>
+      <div class="error-messages">
+        <ng-container *ngFor="let error of error_messages.postMessage">
+          <div class="error-message"
+            *ngIf="submitForm.get('postMessage').hasError(error.type) && (submitForm.get('postMessage').dirty || submitForm.get('postMessage').touched)">
+            {{ error.message }}
+          </div>
+        </ng-container>
+        </div>
+        <ion-row>
+          <ion-col size="11">
+            <div>Tap on the action button to add one or more images to your post.</div>
+          </ion-col>
+          <ion-col size="1">
+            <ion-button (click)="insertImage()">
+              <ion-icon slot="icon-only" name="camera"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item *ngIf="images.length > 0">
+            <div *ngFor="let image of images">
+                <ion-thumbnail>
+                  <img [src]="image" alt="image" (click)="showImage(image)">
+                </ion-thumbnail>  
+                <ion-icon slot="end" name="trash" color="danger" (click)="removeImage(image)"></ion-icon>
+            </div>
+          </ion-item>  
+        </ion-row>
+      </div>
+    </ion-card>
+    <ion-row>
+      <ion-col size="6" size-sm="6" size-md="6" size-lg="6" size-xl="6">
+        <ion-button class="button button-block" shape="round" fill="outline" expand="full" color="primary" (click)="cancel()">Cancel
+        </ion-button>
+      </ion-col>
+      <ion-col size="6" size-sm="6" size-md="6" size-lg="6" size-xl="6">
+        <ion-button class="button button-block" type="submit" [disabled]="!submitForm.valid" shape="round" expand="full" color="primary">Submit
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+  </ion-content>

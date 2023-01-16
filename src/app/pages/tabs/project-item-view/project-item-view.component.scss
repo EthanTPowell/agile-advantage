@@ -1,0 +1,60 @@
+ion-content {
+    // --background: linear-gradient(216deg, #18d4f4, #18d4f4);
+    --background: linear-gradient(216deg, var(--ion-color-primary), var(--ion-color-primary-tint));
+    background-size: 100% 100%;
+    animation: rainbow 30s linear infinite;
+    height: 100%;
+    width: 100%;
+  }
+
+  .truncate {
+    text-align: center;
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .truncate {
+    text-align: center;
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  // button[ion-fab] {
+  //   overflow: visible;
+  //   position: relative;
+
+  //   ion-label {
+  //       position: absolute;
+  //       top: -8px;
+  //       right: 40px;
+
+  //       color: white;
+  //       background-color: rgba(0,0,0,0.7);
+  //       line-height: 24px;
+  //       padding: 4px 8px;
+  //       border-radius: 4px;
+  //   }
+  //   contain: layout;
+  // }
+  
+  ion-fab-button[data-desc] {
+    position: relative;
+  }
+  
+  ion-fab-button[data-desc]::after {
+    position: absolute;
+    content: attr(data-desc);
+    z-index: 1;
+    right: 55px;
+    bottom: 4px;
+    background-color: var(--ion-color-dark);
+    padding: 9px;
+    border-radius: 15px;
+    color: white;
+    box-shadow: 0 3px 5px -1px rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12);
+  }
+  

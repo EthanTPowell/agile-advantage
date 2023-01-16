@@ -1,0 +1,186 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      <span class="e-avatar e-avatar-xsmall"><img [src]="project.logo" alt="image"></span>
+      {{ project.name }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-searchbar #search show-cancel-button="always" cancel-button-text="Custom Cancel" cancel-button-icon="search" placeholder="Search" (ionChange)="searchClick($event)"></ion-searchbar>
+  <ejs-kanban 
+    id='kanban' 
+    #kanban 
+    keyField='Status' 
+    [dataSource]='data' 
+    [externalDropId]='externalKanbanDropId'
+    [cardSettings]='cardSettings' 
+    (dragStop)='onKanbanDragStop($event)' 
+    (dialogClose)="dialogClose($event)"
+    [sortSettings]="sortSettings"
+    [allowDragAndDrop]='allowDragAndDrop'
+    [sortSettings]='sortSettings'
+    [swimlaneSettings]='swimlaneSettings'
+    >
+    <e-columns>
+        <e-column *ngFor="let column of columns;" 
+          [headerText]='column.headerText' 
+          [keyField]='column.keyField' 
+          allowToggle='true' 
+          [isExpanded]='isExpanded'
+        >
+            <!-- <ng-template #template let-data>
+                <div class="header-template-wrap">
+                    <div class="header-icon e-icons {{data.keyField}}"></div>
+                    <div class="header-text">{{data.headerText}}</div>
+                </div>
+            </ng-template> -->
+        </e-column>
+    </e-columns>
+    <ng-template #cardSettingsTemplate let-data>
+      <div class='e-card-content'>
+        <ion-row>
+          <ion-col size="9">
+            <div class="font-16 primary-color mt-3">{{data.Id}}</div>
+          </ion-col>          
+          <ion-col size="3">
+            <ion-button
+              fill="clear"
+              (click)="openProjectItem(data)"
+            >
+            <ion-icon
+                slot="icon-only"
+                name="create"
+            ></ion-icon>
+          </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <div class="font-16 medium-color">{{data.Summary}}</div>
+          </ion-col>
+        </ion-row>
+        <div class="spacer-1"></div>
+
+        <ion-row>
+          <ion-col size="6">
+            <div class="font-14 m-2">Priority:</div>
+          </ion-col>
+          <ion-col size="6">
+            <div [ngClass]="getCssPriority(data.Priority)">{{data.Priority}}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <div class="font-14 m-2">Type:</div>
+          </ion-col>
+          <ion-col size="6">
+            <div [ngClass]="getCssType(data.Type)">{{data.Type}}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-badge color="medium">{{data.Assignee}}</ion-badge>
+          </ion-col>
+        </ion-row>
+      </div>
+  </ng-template>
+    <!-- <ng-template #dialogSettingsTemplate let-data>
+      <ion-row>
+        <ion-col size="4">
+          <div class="font-14 font-w-500 dark-color">
+            ID
+          </div>   
+        </ion-col>
+        <ion-col size="8">
+          <div class="font-16 primary-color">{{data.Id}}</div> 
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">
+          <div class="font-14 font-w-500 dark-color">
+            Status
+          </div>   
+        </ion-col>
+        <ion-col size="8">
+          <ejs-dropdownlist id='Status' #dropdownStatus name="Status"
+            [dataSource]='statusData' value='{{data.Status}}'
+            placeholder='Status'>   
+          </ejs-dropdownlist>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">
+          <div class="font-14 font-w-500 dark-color">
+            Priority
+          </div>   
+        </ion-col>
+        <ion-col size="8">
+          <ejs-dropdownlist type="text" name="Priority" id="Priority"
+            placeholder='Priority' [dataSource]='priorityData'
+            value='{{data.Priority}}'>
+          </ejs-dropdownlist>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">
+          <div class="font-14 font-w-500 dark-color">
+            Type
+          </div>   
+        </ion-col>
+        <ion-col size="8">
+          <ejs-dropdownlist type="text" name="Type" id="Type"
+            placeholder='Type' [dataSource]='typeData'
+            value='{{data.Type}}'>
+          </ejs-dropdownlist>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">
+          <div class="font-14 font-w-500 dark-color">
+            Assignee
+          </div>   
+        </ion-col>
+        <ion-col size="8">
+          <ejs-dropdownlist type="text" name="Assignee" id="Assignee"
+            placeholder='Assignee' [dataSource]='assigneeData'
+            value='{{data.Assignee}}'>
+          </ejs-dropdownlist>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">
+          <div class="font-14 font-w-500 dark-color">
+            Name
+          </div>   
+        </ion-col>
+        <ion-col size="8">
+          <div class="e-float-input e-control-wrapper">
+            <textarea type="text" name="Summary" id="Summary" class="e-field"
+            value='{{data.Summary}}' placeholder="Summary"></textarea>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ng-template> -->
+  </ejs-kanban>
+
+</ion-content>
+
+<ion-fab
+    vertical="bottom"
+    horizontal="center"
+    slot="fixed"
+>
+    <ion-fab-button
+        (click)="addProjectItem()"
+        data-desc="Add Ticket"
+        size="small"
+        color="accent"
+
+    >
+        <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+</ion-fab>

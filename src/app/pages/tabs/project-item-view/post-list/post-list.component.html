@@ -1,0 +1,44 @@
+<div *ngFor="let post of posts | sortByDate">
+  <ion-card>
+    <ion-toolbar color="secondary">
+    <ion-card-header>
+<ion-row>
+  <div *ngIf="post.imageUrl">
+    <!-- <span class="e-avatar e-avatar-large"><img [src]="post.imageUrl" alt="profileImage" (click)="showImage(post.imageUrl)"></span> -->
+  </div>
+  <div *ngIf="!post.imageUrl">
+    <!-- <span class="e-avatar e-avatar-large"><img [src]="assets/profile-placeholder.png" alt="profileImage"></span> -->
+  </div>
+  <ion-col size="11">
+    <div
+        class="font-20 primary-color m-3"
+    >                
+        {{ post.title }}
+      <ion-icon
+        (click)="editPost(post)"
+        src="assets/svg/icons/edit.svg"
+        slot="icon-only"
+      ></ion-icon>  
+      <ion-icon
+        (click)="deletePost(post)"
+        src="assets/svg/icons/close.svg"
+        slot="icon-only"
+        ></ion-icon>  
+      <ion-icon
+        (click)="viewPost(post)"
+        src="assets/svg/icons/eye.svg"
+        slot="icon-only"
+      ></ion-icon>  
+    </div>
+    <div class="font-10">
+        {{ post.userName }} | {{ post.created_at | timeAgo }}
+    </div>
+</ion-col>
+</ion-row>
+      </ion-card-header>
+    </ion-toolbar>
+    <ion-card-content>
+      {{post.message}}
+    </ion-card-content>
+  </ion-card>
+</div>

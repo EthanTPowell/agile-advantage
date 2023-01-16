@@ -1,0 +1,17 @@
+[
+    {
+        "id": 0,
+        "value": "Bug",
+        "svg": "assets/svg/bug.svg"
+    },
+    {
+        "id": 1,
+        "value": "Feature",
+        "svg": "assets/svg/feature.svg"
+    },
+    {
+        "id": 2,
+        "value": "Task",
+        "svg": "assets/svg/task.svg"
+    }
+]

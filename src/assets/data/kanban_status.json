@@ -1,0 +1,47 @@
+[
+    {
+        "id": 0,
+        "keyField": "Open",
+        "headerText": "To Do",
+        "value": "To Do",
+        "icon": "add-circle",
+        "color": "primary",
+        "maxCount": "2"    
+    },
+    {
+        "id": 1,
+        "keyField": "NeedInfo",
+        "headerText": "Need Info",
+        "value": "NeedInfo",
+        "icon": "refresh-circle",
+        "color": "tertiary",
+        "maxCount": "2"    
+    },
+    {
+        "id": 2,
+        "keyField": "InProgress",
+        "headerText": "In Progress",
+        "value": "In Progress",
+        "icon": "refresh-circle",
+        "color": "danger",
+        "maxCount": "2"    
+    },
+    {
+        "id": 3,
+        "keyField": "Review",
+        "headerText": "In Review",
+        "value": "In Review",
+        "icon": "help-circle",
+        "color": "warning",
+        "maxCount": "2"    
+
+    },
+    {
+        "id": 4,
+        "keyField": "Close",
+        "headerText": "Done",
+        "value": "Done",
+        "icon": "ios-checkmark-circle",
+        "color": "success",
+        "maxCount": "2"    }
+]

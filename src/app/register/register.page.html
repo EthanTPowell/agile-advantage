@@ -1,0 +1,97 @@
+<ion-content no-padding>
+  <div class="main">
+    <ion-card no-margin class="card w-400p-center">
+        <ion-card-header>
+          <!-- <ion-row class="row"> -->
+            <div class="davesa-logo">
+              <img src="assets/logo/logo.png" class="img-logo" alt="davesa">
+            </div>
+          <!-- </ion-row> -->
+        </ion-card-header>
+        <ion-card-content>
+          <div class="ion-padding">
+            <form [formGroup]="submitForm" (submit)="onSubmit()">
+              <ion-item>
+                <ion-label position="stacked">First Name</ion-label>
+                <ion-input type="text" formControlName="firstName" [(ngModel)]="userDetails.firstName" name="firstName" placeholder="First Name" autocomplete="name">
+                </ion-input>
+              </ion-item>
+              <div class="error-messages">
+                <ng-container *ngFor="let error of error_messages.firstName">
+                  <div class="error-message"
+                    *ngIf="submitForm.get('firstName').hasError(error.type) && (submitForm.get('firstName').dirty || submitForm.get('firstName').touched)">
+                    {{ error.message }}
+                  </div>
+                </ng-container>
+              </div>
+              <ion-item>
+                <ion-label position="stacked">Last Name</ion-label>
+                <ion-input type="text" formControlName="lastName" [(ngModel)]="userDetails.lastName" name="lastName" placeholder="Last Name" autocomplete="family-name">
+                </ion-input>
+              </ion-item>
+              <div class="error-messages">
+                <ng-container *ngFor="let error of error_messages.lastName">
+                  <div class="error-message"
+                    *ngIf="submitForm.get('lastName').hasError(error.type) && (submitForm.get('lastName').dirty || submitForm.get('lastName').touched)">
+                    {{ error.message }}
+                  </div>
+                </ng-container>
+              </div>
+              <ion-item>
+                <ion-label position="stacked">Email Address</ion-label>
+                <ion-input type="email" formControlName="email" [(ngModel)]="userDetails.email" name="email" placeholder="Email" autocomplete="email">
+                </ion-input>
+              </ion-item>
+              <div class="error-messages">
+                <ng-container *ngFor="let error of error_messages.email">
+                  <div class="error-message"
+                    *ngIf="submitForm.get('email').hasError(error.type) && (submitForm.get('email').dirty || submitForm.get('email').touched)">
+                    {{ error.message }}
+                  </div>
+                </ng-container>
+              </div>
+              <ion-item>
+                <ion-label position="stacked">Password</ion-label>
+                <ion-input type="password" formControlName="password" placeholder="Password" [(ngModel)]="userDetails.password">
+                </ion-input>
+              </ion-item>
+              <div class="error-messages">
+                <ng-container *ngFor="let error of error_messages.password">
+                  <div class="error-message"
+                    *ngIf="submitForm.get('password').hasError(error.type) && (submitForm.get('password').dirty || submitForm.get('password').touched)">
+                    {{ error.message }}
+                  </div>
+                </ng-container>
+              </div>
+              <ion-item>
+                <ion-label position="stacked">Comfirm Password</ion-label>
+                <ion-input type="password" formControlName="cpassword" placeholder="Confirm Password" [(ngModel)]="userDetails.cpassword">
+                </ion-input>
+              </ion-item>
+              <div class="error-messages">
+                <ng-container *ngFor="let error of error_messages.cpassword">
+                  <div class="error-message"
+                    *ngIf="submitForm.get('cpassword').hasError(error.type) && (submitForm.get('cpassword').dirty || submitForm.get('cpassword').touched)">
+                    {{ error.message }}
+                  </div>
+                </ng-container>
+              </div>
+              <div class="spacer-1"></div>
+              <ion-row class="buttons">
+                <ion-col col-2>
+                  <ion-button class="button button-block" shape="round" fill="outline" [routerLink]="['/login']">
+                    Sign In
+                  </ion-button>
+                </ion-col>
+                <ion-col col-2>
+                  <ion-button class="button button-block" shape="round" type="submit" [disabled]="!submitForm.valid">
+                    Register
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </form>
+          </div>
+        </ion-card-content>
+      </ion-card>
+  </div>
+</ion-content>

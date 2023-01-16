@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      <span class="e-avatar e-avatar-xsmall">
+        <img [src]="project.logo" alt="image" />
+      </span>
+      {{ project.name }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment [(ngModel)]="segment" scrollable>
+    <ion-segment-button value="allTickets"> Open Tickets ({{allOpenProjectItems}}) </ion-segment-button>
+    <ion-segment-button value="myTickets"> My Tickets  ({{myProjectItems}}) </ion-segment-button>
+    <ion-segment-button value="closedTickets">
+      Closed Tickets ({{allClosedProjectItems}})
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="segment">
+    <div *ngSwitchCase="'myTickets'" class="bg-tertiary">
+      <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
+        <app-user-projects></app-user-projects>
+      </ion-col>
+    </div>
+
+    <div *ngSwitchCase="'allTickets'" class="bg-tertiary">
+      <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
+        <app-all-open-projects></app-all-open-projects>
+      </ion-col>
+    </div>
+
+    <div *ngSwitchCase="'closedTickets'" class="bg-tertiary">
+      <ion-col size="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
+        <app-all-closed-projects></app-all-closed-projects>
+      </ion-col>
+    </div>
+  </div>
+</ion-content>
+
+<ion-fab
+    vertical="bottom"
+    horizontal="center"
+    slot="fixed"
+>
+    <ion-fab-button
+        (click)="addItem()"
+        data-desc="Add Item"
+        size="small"
+        color="accent"
+    >
+        <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+</ion-fab>
