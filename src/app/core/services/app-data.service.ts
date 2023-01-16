@@ -31,7 +31,7 @@ export class AppDataService {
     };
     myButtons.push(blank);
     developers.forEach(user => {
-      let userName = user.firstName + ' ' + user.lastName;
+      let userName = user.userName;
       let thisButton = 
         {
           text: userName,

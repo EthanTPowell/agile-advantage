@@ -12,27 +12,14 @@
           <div class="ion-padding">
             <form [formGroup]="submitForm" (submit)="onSubmit()">
               <ion-item>
-                <ion-label position="stacked">First Name</ion-label>
-                <ion-input type="text" formControlName="firstName" [(ngModel)]="userDetails.firstName" name="firstName" placeholder="First Name" autocomplete="name">
+                <ion-label position="stacked">Username</ion-label>
+                <ion-input type="text" formControlName="userName" [(ngModel)]="userDetails.userName" name="userName" placeholder="Username" autocomplete="name">
                 </ion-input>
               </ion-item>
               <div class="error-messages">
-                <ng-container *ngFor="let error of error_messages.firstName">
+                <ng-container *ngFor="let error of error_messages.userName">
                   <div class="error-message"
-                    *ngIf="submitForm.get('firstName').hasError(error.type) && (submitForm.get('firstName').dirty || submitForm.get('firstName').touched)">
-                    {{ error.message }}
-                  </div>
-                </ng-container>
-              </div>
-              <ion-item>
-                <ion-label position="stacked">Last Name</ion-label>
-                <ion-input type="text" formControlName="lastName" [(ngModel)]="userDetails.lastName" name="lastName" placeholder="Last Name" autocomplete="family-name">
-                </ion-input>
-              </ion-item>
-              <div class="error-messages">
-                <ng-container *ngFor="let error of error_messages.lastName">
-                  <div class="error-message"
-                    *ngIf="submitForm.get('lastName').hasError(error.type) && (submitForm.get('lastName').dirty || submitForm.get('lastName').touched)">
+                    *ngIf="submitForm.get('userName').hasError(error.type) && (submitForm.get('userName').dirty || submitForm.get('userName').touched)">
                     {{ error.message }}
                   </div>
                 </ng-container>
@@ -64,7 +51,7 @@
                 </ng-container>
               </div>
               <ion-item>
-                <ion-label position="stacked">Comfirm Password</ion-label>
+                <ion-label position="stacked">Confirm Password</ion-label>
                 <ion-input type="password" formControlName="cpassword" placeholder="Confirm Password" [(ngModel)]="userDetails.cpassword">
                 </ion-input>
               </ion-item>

@@ -69,9 +69,9 @@ export class AuthenticationService {
                         const userDto: UserDto = UserModel.emptyDto();
                         userDto.id = res.user.uid;
                         userDto.email = user.email;
-                        userDto.userName = user.firstName + ' '  + user.lastName;
-                        userDto.firstName = user.firstName;
-                        userDto.lastName = user.lastName;
+                        userDto.userName = user.userName;
+                        // userDto.firstName = user.firstName;
+                        // userDto.lastName = user.lastName;
                         this.userDataService.create(userDto).then(user => {
                             this.events.publish('user:signup', {userDto});
                             resolve(res.user);    

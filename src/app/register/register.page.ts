@@ -13,8 +13,7 @@ import { Toast } from '@capacitor/toast';
 export class RegisterPage implements OnInit {
 
   public userDetails:any = {
-    firstName: '',
-    lastName: '',
+    userName: '',
     email: '',
     password: '',
     cpassword: ''
@@ -29,11 +28,11 @@ export class RegisterPage implements OnInit {
       { type: 'maxLength', message: 'Email length must be lower or equal to 50 character.' },
       { type: 'pattern', message: 'Please enter a valid email' }
     ],
-    'firstName': [
-      { type: 'required', message: 'First Name is required.' },
-      { type: 'minLength', message: 'First Name length must be longer or equal to 6 character.' },
-      { type: 'maxLength', message: 'First Name length must be lower or equal to 50 character.' },
-      { type: 'pattern', message: 'Please enter a valid First Name' }
+    'userName': [
+      { type: 'required', message: 'User name is required.' },
+      { type: 'minLength', message: 'User name length must be longer or equal to 6 character.' },
+      { type: 'maxLength', message: 'User name length must be lower or equal to 50 character.' },
+      { type: 'pattern', message: 'Please enter a valid User name' }
     ],
     'lastName': [
       { type: 'required', message: 'Last Name is required.' },
@@ -69,12 +68,7 @@ export class RegisterPage implements OnInit {
         Validators.maxLength(255),
         Validators.pattern('^[a-zA-Z0-9!@#$%^&*()_+-=]*$')
       ])),
-      firstName: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.minLength(1),
-        Validators.maxLength(255),
-      ])),
-      lastName: new FormControl('', Validators.compose([
+      userName: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(1),
         Validators.maxLength(255),
