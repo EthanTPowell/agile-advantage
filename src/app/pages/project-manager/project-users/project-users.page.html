@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">{{ project.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label class="primary-color">Users</ion-label>
+      <ion-select
+        [compareWith]="compareWith"
+        placeholder="Select Users"
+        (ionChange)="handleChange($event)"
+        [multiple]="true"
+        [(ngModel)]="selectUsers"
+      >
+        <ion-select-option *ngFor="let user of users" [value]="user"
+          ><ion-chip
+            >{{ user.userName }}</ion-chip
+          ></ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+    <ion-chip color="primary" class="font-9" *ngFor="let user of selectUsers"
+      >{{ user.userName }}
+      <ion-icon name="close-circle"></ion-icon>
+    </ion-chip>
+  </ion-list>
+  <ion-row>
+    <ion-col size="6" size-sm="6" size-md="6" size-lg="6" size-xl="6">
+      <ion-button
+        class="button button-block"
+        shape="round"
+        fill="outline"
+        expand="full"
+        color="primary"
+        (click)="cancel()"
+        >Cancel
+      </ion-button>
+    </ion-col>
+    <ion-col size="6" size-sm="6" size-md="6" size-lg="6" size-xl="6">
+      <ion-button
+        class="button button-block"
+        type="submit"
+        shape="round"
+        expand="full"
+        color="primary"
+        (click)="save()"
+        >Save
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

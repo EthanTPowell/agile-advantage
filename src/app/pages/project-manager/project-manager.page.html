@@ -1,9 +1,103 @@
 <ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Projects</ion-title>
+  </ion-toolbar>
   <ion-toolbar>
-    <ion-title>ProjectManager</ion-title>
+    <ion-searchbar
+      [(ngModel)]="searchTerm"
+      showCancelButton="focus"
+      animated
+    ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
+  <ion-card>
+    <ion-item-sliding *ngFor="let project of projects | search : searchTerm">
+      <ion-item>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <span class="e-avatar e-avatar-xlarge"
+                ><img [src]="project.logo" alt="image"
+              /></span>
+              <!-- <ion-thumbnail>
+                <img [src]="project.logo">
+              </ion-thumbnail> -->
+              <ion-icon
+                [ngClass]="project.active ? 'success-color' : 'danger-color'"
+                class="font-20 m-1"
+                name="checkmark-circle"
+              ></ion-icon>
+              <span class="font-20 font-w-500 primary-color"
+                >{{ project?.name }}</span
+              >
+            </ion-item>
+            <ion-chip
+              color="primary"
+              class="font-9"
+              *ngFor="let user of project.users"
+              >{{ user.userName }}
+              <ion-icon name="close-circle"></ion-icon>
+            </ion-chip>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item-options>
+        <ion-item-option
+          color="primary"
+          class="w-100p"
+          (click)="activeToggle(project)"
+        >
+          <ion-icon
+            slot="bottom"
+            ios="ellipsis-horizontal"
+            md="ellipsis-vertical"
+          ></ion-icon>
+          Active
+        </ion-item-option>
+        <ion-item-option
+          color="firebase"
+          class="w-100p"
+          (click)="manageEpics(project)"
+        >
+          <ion-icon
+            slot="bottom"
+            ios="ellipsis-horizontal"
+            md="ellipsis-vertical"
+          ></ion-icon>
+          Epics
+        </ion-item-option>
+        <ion-item-option
+          color="warning"
+          class="w-100p"
+          (click)="editProject(project)"
+        >
+          <ion-icon slot="bottom" name="pencil"></ion-icon>
+          Edit
+        </ion-item-option>
+        <ion-item-option
+          color="secondary"
+          class="w-100p"
+          (click)="addEditUsers(project)"
+        >
+          <ion-icon slot="bottom" name="person"></ion-icon>
+          Users
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-card>
 </ion-content>
+
+<ion-fab vertical="bottom" horizontal="center" slot="fixed">
+  <ion-fab-button (click)="addProject()" data-desc="Add Ticket">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

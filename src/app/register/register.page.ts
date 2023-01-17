@@ -90,10 +90,12 @@ export class RegisterPage implements OnInit {
   };
 
   onSubmit() {
+    console.log(`${this.userDetails}`)
     this.authenticationService.createAccount(this.userDetails).then(res => {
-      
+      this.toastAlert(res);
+
     }, (err) => {
-      this.toastAlert(err)
+      this.toastAlert(err);
     })
   };
 

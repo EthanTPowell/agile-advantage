@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">My Projects</ion-title>
+ </ion-toolbar>
+ <!-- <ion-toolbar>
+  <ion-searchbar [(ngModel)]="searchTerm" showCancelButton="focus" animated></ion-searchbar>
+ </ion-toolbar> -->
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  <ion-card *ngFor="let project of projects | searchProjects : searchTerm" (click)="openProject(project)">
+          <ion-item class="m-3">
+            <span class="e-avatar e-avatar-xlarge"><img [src]="project.logo" alt="image"></span>
+            <ion-icon
+              [ngClass]="project.active ? 'success-color' : 'danger-color'"
+              class="font-20 m-1"
+              name="checkmark-circle"
+            ></ion-icon>
+            <span class="font-20 font-w-500 primary-color">{{ project?.name }}</span>
+          </ion-item>
+  </ion-card>
+</ion-content>
+
+<ion-fab vertical="bottom" horizontal="center" slot="fixed">
+  <ion-fab-button (click)="addProject()" data-desc="Add Project">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+

@@ -16,6 +16,9 @@ export class PagesComponent implements OnInit {
   public appPages = [
     { title: 'Home', url: '/pages/tabs', icon: 'mail' },
     { title: 'Logout', url: '/login', icon: 'log-out' },
+    { title: 'Project Manager', url: '/pages/project-manager', icon: 'settings' },
+    { title: 'My Projects', url: '/pages/my-projects', icon: 'bookmarks' },
+    
   ];
 
   public adminPages = [

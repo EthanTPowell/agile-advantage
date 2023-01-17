@@ -7,7 +7,7 @@ import { UserDataService } from '../data-services/user-data.service';
 import { UtilService } from 'src/app/core/services/util.service';
 import { UserDto, UserModel } from 'src/app/core/models/user.model';
 import firebase from '@firebase/app-compat';
-
+import { Router } from '@angular/router';
 
 export class AuthInfo {
     constructor(public $uid: string) {}
@@ -27,6 +27,7 @@ export class AuthenticationService {
         private userDataService: UserDataService,
         private util: UtilService,
         public events: Events,
+        private router: Router
         ) {
         this.fireAuth.authState.pipe(
             take(1)
@@ -62,26 +63,35 @@ export class AuthenticationService {
 
     public createAccount(user: any): Promise<any> {
         return new Promise<any>((resolve, reject) => {
-            this.fireAuth.createUserWithEmailAndPassword(user.email, user.password)
-                .then(res => {
-                    if (res.user) {
-                        this.authInfo$.next(new AuthInfo(res.user.uid));
-                        const userDto: UserDto = UserModel.emptyDto();
-                        userDto.id = res.user.uid;
-                        userDto.email = user.email;
-                        userDto.userName = user.userName;
-                        // userDto.firstName = user.firstName;
-                        // userDto.lastName = user.lastName;
-                        this.userDataService.create(userDto).then(user => {
-                            this.events.publish('user:signup', {userDto});
-                            resolve(res.user);    
-                        });
-                    }
-                })
-                .catch(err => {
-                    this.authInfo$.next(AuthenticationService.UNKNOWN_USER);
-                    reject(`creation failed ${err}`);
-                });
+            // this.userDataService.getByEmail(user.user.email).subscribe((userDto: UserDto[]) => {
+                // if(userDto[0]) {
+                //     this.util.presentToast("This email already exists", null, 'top', 3000);
+                // } else {
+                    this.fireAuth.createUserWithEmailAndPassword(user.email, user.password)
+                    .then(res => {
+                        if (res.user) {
+                            this.authInfo$.next(new AuthInfo(res.user.uid));
+                            const userDto: UserDto = UserModel.emptyDto();
+                            userDto.id = res.user.uid;
+                            userDto.email = user.email;
+                            userDto.userName = user.userName;
+                            // userDto.firstName = user.firstName;
+                            // userDto.lastName = user.lastName;
+                            this.userDataService.create(userDto).then(user => {
+                                this.events.publish('user:signup', {userDto});
+                                resolve(res.user);    
+                            });
+                        }
+                    })
+                    .catch(err => {                        
+                        this.authInfo$.next(AuthenticationService.UNKNOWN_USER);
+                        reject(`creation failed ${err}`);
+                    });
+                        
+                // }
+    
+            // });
+
         });
     }
 
@@ -129,18 +139,37 @@ export class AuthenticationService {
         // TODO sign into offline app
         this.userDataService.getByEmail(user.user.email).subscribe((userDto: UserDto[]) => {
             if(userDto[0]) {
-                userDto[0].id = user.user.uid;
-                userDto[0].userName = user.user.displayName;
-                userDto[0].email = user.user.email;
-                userDto[0].imageUrl = user.user.photoURL;
-                this.userDataService.create(userDto[0]).then(() => {
-                    this.events.publish('user:login', {userId: user.user.uid});
-                });            
+                debugger
+                let thisUser: UserDto = userDto[0];
+                thisUser.userName = user.user.displayName;
+                thisUser.email = user.user.email;
+                thisUser.imageUrl = user.user.photoURL;
+                this.updateUser(thisUser)
             } else {
-                this.util.presentAlert('Error', 'There is no valid user. Please contact Administrator')
+                debugger
+                let newUser: UserDto = UserModel.emptyDto();
+                newUser.userName = user.user.displayName;
+                newUser.email = user.user.email;
+                newUser.imageUrl = user.user.photoURL;     
+                this.createUser(newUser);        
+                // this.util.presentAlert('Error', 'There is no valid user. Please contact Administrator')
             }
         })
     }
+
+    updateUser(thisUser: UserDto) {
+        this.userDataService.update(thisUser).then(() => {
+            this.router.navigateByUrl('/');
+            // this.events.publish('user:login', {userId: thisUser.id});
+        });            
+    }
     
+    createUser(newUser: UserDto) {
+        this.userDataService.create(newUser).then(() => {
+            this.router.navigateByUrl('/');
+            // this.events.publish('user:signup', {userId: newUser.id});
+        });            
+    }
+
 
 }

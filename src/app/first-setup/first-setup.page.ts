@@ -95,7 +95,13 @@ export class FirstSetupPage implements OnInit {
         this.userDataService.getOne(userAuth.uid).subscribe((data) => {
           this.user = data;
           this.userId = this.user.id;
-        });
+        }, error => {
+          console.warn(error.responseText)
+          console.log({ error });
+          // if(error.error){
+          //     this.snackBar.open(error.error, '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 }); 
+          // }  
+      }); 
       }
     });
 

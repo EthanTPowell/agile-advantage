@@ -6,8 +6,12 @@ import { ProjectManagerPage } from './project-manager.page';
 const routes: Routes = [
   {
     path: '',
-    component: ProjectManagerPage
-  }
+    component: ProjectManagerPage,    
+  },
+  // {
+  //   path: 'project-users',
+  //   loadChildren: () => import('./project-users/project-users.module').then( m => m.ProjectUsersPageModule)
+  // },    
 ];
 
 @NgModule({
