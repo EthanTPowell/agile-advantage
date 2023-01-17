@@ -22,20 +22,21 @@ const routes: Routes = [
         loadChildren: () =>
           import('./home/home.module').then((m) => m.HomePageModule),
       },
+      {
+        path: 'user-manager',
+        loadChildren: () => import('./user-manager/user-manager.module').then( m => m.UserManagerPageModule)
+      },
+      {
+        path: 'project-manager',
+        loadChildren: () => import('./project-manager/project-manager.module').then( m => m.ProjectManagerPageModule)
+      },
+      {
+        path: 'my-projects',
+        loadChildren: () => import('./my-projects/my-projects.module').then( m => m.MyProjectsPageModule)
+      },
     ],
   },
-  {
-    path: 'user-manager',
-    loadChildren: () => import('./user-manager/user-manager.module').then( m => m.UserManagerPageModule)
-  },
-  {
-    path: 'project-manager',
-    loadChildren: () => import('./project-manager/project-manager.module').then( m => m.ProjectManagerPageModule)
-  },
-  {
-    path: 'my-projects',
-    loadChildren: () => import('./my-projects/my-projects.module').then( m => m.MyProjectsPageModule)
-  },
+
 ];
 
 @NgModule({

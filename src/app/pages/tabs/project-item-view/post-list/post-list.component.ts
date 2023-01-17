@@ -11,6 +11,7 @@ import { ModalController } from '@ionic/angular';
 import { DeletePostComponent } from '../delete-post/delete-post.component';
 import { ViewPostComponent } from '../view-post/view-post.component';
 import { UtilService } from 'src/app/core/services/util.service';
+import { ViewImageComponent } from '../../view-image/view-image.component';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class PostListComponent implements OnInit {
   public projectItem: ProjectItemDto = ProjectItemModel.emptyDto();
   public developers: UserDto[] = [];
   public newPosts: ProjectItemPostDto[] = [];
+  public images: string[] = []
 
 
 
@@ -123,6 +125,17 @@ export class PostListComponent implements OnInit {
     .then((data) => {
       this.ngOnInit();
     });
+  }
+
+  async showImage(image) {
+    const model = await this.modalController.create({
+      component: ViewImageComponent,
+      cssClass: 'modal-wrapper',
+      componentProps: {
+        image: image,
+      },
+    });
+    model.present();
   }
 
 }

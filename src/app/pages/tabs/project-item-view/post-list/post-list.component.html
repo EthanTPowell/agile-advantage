@@ -38,7 +38,21 @@
       </ion-card-header>
     </ion-toolbar>
     <ion-card-content>
-      {{post.message}}
+      <ion-item>{{post.message}}</ion-item>
+      <ion-row>
+        <ion-item *ngIf="post.images.length > 0">
+          <div *ngFor="let image of post.images">
+              <ion-thumbnail>
+                <img [src]="image" alt="image">
+              </ion-thumbnail>  
+                <ion-icon 
+                slot="end"         
+                src="assets/svg/icons/eye.svg"
+                slot="icon-only"
+                (click)="showImage(image)"></ion-icon>
+          </div>
+        </ion-item>  
+      </ion-row>
     </ion-card-content>
   </ion-card>
 </div>
