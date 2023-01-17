@@ -12,6 +12,7 @@ import { UserDto } from '../core/models/user.model';
 export class PagesComponent implements OnInit {
 
   public user$: Observable<UserDto>;
+  public placeholder = '/assets/profile-placeholder.png'
 
   public appPages = [
     { title: 'Home', url: '/pages/tabs', icon: 'mail' },
