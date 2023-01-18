@@ -31,6 +31,8 @@ export class ProjectAddComponent implements OnInit {
   public viewUsername;
   public postText;
   public developers: UserDto[];
+  public placeholder = '/assets/profile-placeholder.png';
+
 
   error_messages = {
     'name': [
@@ -78,27 +80,31 @@ export class ProjectAddComponent implements OnInit {
       ownerId: new FormControl(this.project.ownerId, Validators.compose([
         Validators.required,
       ])),
-      stage: new FormControl(this.project.createId, Validators.compose([
-        Validators.required
-      ])),
-      prefix: new FormControl(this.project.prefix, Validators.compose([
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(4),
-      ])),
-      estType: new FormControl(this.project.estType, Validators.compose([
-        Validators.required
-      ])),
+      // stage: new FormControl(this.project.createId, Validators.compose([
+      //   Validators.required
+      // ])),
+      // prefix: new FormControl(this.project.prefix, Validators.compose([
+      //   Validators.required,
+      //   Validators.minLength(2),
+      //   Validators.maxLength(4),
+      // ])),
+      // estType: new FormControl(this.project.estType, Validators.compose([
+      //   Validators.required
+      // ])),
       start_at: new FormControl('', null),
       end_at: new FormControl('', null),
       users: new FormControl('', null)
     });
+
+    console.log(this.project.ownerId, this.project.createId, this.project.prefix, this.project.estType)
 
     this.authenticationService.checkAuth().then((userAuth: any) => {
       if(userAuth) {
         this.userDataService.getOne(userAuth.uid).subscribe((user) => {
           this.user = user;
           console.log(`user: ${this.user}`);
+
+
         });
       }
     });
@@ -111,6 +117,8 @@ export class ProjectAddComponent implements OnInit {
 
   onSubmit() {
     let date: any = new Date().toISOString(); 
+    this.project.createId = this.user.id;
+    this.project.ownerId = this.user.id;
     if(this.url) {
       this.project.logo = this.url;
     };

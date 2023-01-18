@@ -30,6 +30,15 @@ export class AppDataService {
       },
     };
     myButtons.push(blank);
+    let cancel = {
+      text: 'Cancel',
+      role: 'cancel',
+      cssClass: 'cancel',
+      data: {
+        action: 'cancel',
+      },
+    };
+    myButtons.push(cancel);
     developers.forEach(user => {
       let userName = user.userName;
       let thisButton = 

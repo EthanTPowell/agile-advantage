@@ -200,7 +200,9 @@ export class ProjectItemAddComponent implements OnInit {
 
   selectDeveloper() {
     this.appDataService.selectDeveloper(this.developers).then((response) => {
-      this.projectItem.Assignee = response;
+      if(response){
+        this.projectItem.Assignee = response;
+      }
     })
   };
 

@@ -14,6 +14,8 @@ import { tap } from 'rxjs/operators';
 import { ProjectDto, ProjectModel } from 'src/app/core/models/project.model';
 import { ProjectDataService } from 'src/app/core/services/data-services/project-data.service';
 import { AuthenticationService } from 'src/app/core/services/firestore/firebase-authentication.service';
+import { FsImageService } from 'src/app/core/services/fs-image.service';
+import { ViewImageComponent } from '../../tabs/view-image/view-image.component';
 
 @Component({
   selector: 'app-project-edit',
@@ -28,6 +30,7 @@ export class ProjectEditComponent implements OnInit {
   public user: UserDto = UserModel.emptyDto();
   public submitForm: FormGroup;
   public users: UserDto[];
+  public url: string;
 
   error_messages = {
     'name': [
@@ -44,7 +47,10 @@ export class ProjectEditComponent implements OnInit {
     private modalController: ModalController,
     private navParams: NavParams ,
     private userDataService: UserDataService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private actionSheetController: ActionSheetController,
+    private imageService: FsImageService,
+
 
   ) { 
 
@@ -54,6 +60,7 @@ export class ProjectEditComponent implements OnInit {
   ngOnInit() {
     this.project = this.navParams.data.project;
     console.log(this.project);
+    this.url = this.navParams.data.project.logo;
 
     this.submitForm = this.formBuilder.group({
       name: new FormControl(this.project.name, Validators.compose([
@@ -80,8 +87,7 @@ export class ProjectEditComponent implements OnInit {
   }
 
   onSubmit() {
-    let date: any = new Date().toISOString(); 
-    this.project.updated_at = date;
+    this.project.logo = this.url;
     this.projectDataService.update(this.project).then(res => {
       this.modalController.dismiss();
     });  
@@ -89,6 +95,71 @@ export class ProjectEditComponent implements OnInit {
 
   cancel() {
     this.modalController.dismiss();
+  }
+
+
+  async insertImage() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Select Picture',
+      buttons: [
+        {
+          text: 'Camera',
+          icon: 'camera',
+          handler: () => {
+            this.postImage(true);
+          }
+        },
+        {
+          text: 'Gallery',
+          icon: 'images',
+          handler: () => {
+            this.postImage(false);
+          }
+        }, {
+          text: 'Cancel',
+          icon: 'help-circle',
+          role: 'cancel',
+          handler: () => {
+          }
+        }]
+    });
+    await actionSheet.present();
+    this.ngOnInit();
+  }
+
+  async postImage(isCamera: boolean) {
+    let fileName = this.imageService.generateFilename();
+    if (isCamera) {
+      try {
+        const url = await this.imageService.postPictureCamera(fileName);
+        this.url = url.url;
+      } catch (err) {
+        console.error(`postImage err: ${err}`);
+      } finally {
+  
+      }   
+    } else {
+      let fileName = this.imageService.generateFilename();
+      try {
+        const url = await this.imageService.postPictureGallery(fileName);
+        this.url = url.url;
+      } catch (err) {
+        console.error(`postImage err: ${err}`);
+      } finally {
+  
+      }   
+    }
+  }
+
+  async showImage(image) {
+    const model = await this.modalController.create({
+      component: ViewImageComponent,
+      cssClass: 'modal-wrapper',
+      componentProps: {
+        image: image,
+      },
+    });
+    model.present();
   }
 
 

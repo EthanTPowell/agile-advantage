@@ -12,7 +12,7 @@
             <ion-col size="2" size-sm="12" size-md="4" size-lg="2" size-xl="2">
               <div>
                 <ion-avatar>
-                  <img src="{{ user.imageUrl }}" alt="profile" />
+                  <img [src]="user.imageUrl ? user.imageUrl : placeholder " alt="profile" />
                 </ion-avatar>
               </div>
             </ion-col>

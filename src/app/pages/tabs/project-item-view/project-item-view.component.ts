@@ -72,20 +72,24 @@ export class ProjectItemViewComponent implements OnInit {
 
   selectPriority() {
     this.appDataService.selectPriority().then((response) => {
-      this.projectItem.Priority = response;
 
+      if (response) {
+      this.projectItem.Priority = response;
       this.projectItemDataService.update(this.projectItem).then(res => {
         
-      })
+      })}
     })
   };
 
   selectStatus() {
     this.appDataService.selectStatus().then((response) => {
-      this.projectItem.Status = response;
-      this.projectItemDataService.update(this.projectItem).then(res => {
+      if (response) {
+        this.projectItem.Status = response;
+        this.projectItemDataService.update(this.projectItem).then(res => {
+          
+        })
         
-      })
+      }
     })
   };
 
@@ -106,10 +110,11 @@ export class ProjectItemViewComponent implements OnInit {
 
   selectDeveloper() {
     this.appDataService.selectDeveloper(this.developers).then((response) => {
-      this.projectItem.Assignee = response;
+      if(response){
+      this.projectItem.Assignee = response
       this.projectItemDataService.update(this.projectItem).then(res => {
         
-      })
+      })}
     })
   };
 

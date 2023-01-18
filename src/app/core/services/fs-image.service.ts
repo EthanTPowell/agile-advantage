@@ -31,7 +31,7 @@ export class FsImageService {
       allowEditing: true,
       resultType: CameraResultType.Uri,
       source: CameraSource.Camera
-    });
+    })
 
     this.myImage = image.webPath;
 
@@ -119,6 +119,7 @@ export class FsImageService {
   }
 
   async postPictureCamera(fileName: string) {
+    console.log('hit');
     const image = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
@@ -126,9 +127,13 @@ export class FsImageService {
       source: CameraSource.Camera // Camera, Photos or Prompt!
     });
 
+    console.log('first');
+
     console.log(`image.webPath: ${image.webPath}`);
     let blob = await fetch(image.webPath).then(r => r.blob());
     this.loadingService.showPro();
+
+    console.log("second");
 
     let success = await this.storageService.uploadContent('/user-images/', blob, fileName);
     console.log(`success: ${success}`);
