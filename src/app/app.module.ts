@@ -43,10 +43,6 @@ import { ProjectDataService } from "./core/services/data-services/project-data.s
     AngularFireFunctionsModule,
     HttpClientModule,
     RichTextEditorModule,
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 3ffa2de20ba47d00065786e40723fecfca56ef61
     GridModule
     // ServiceWorkerModule.register('combined-sw.js', {
     //   enabled: environment.production,
@@ -54,15 +50,6 @@ import { ProjectDataService } from "./core/services/data-services/project-data.s
     //   // or after 30 seconds (whichever comes first).
     //   registrationStrategy: 'registerWhenStable:30000'
     // }),
-=======
-    GridModule,
-    ServiceWorkerModule.register('combined-sw.js', {
-      enabled: environment.production,
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    }),
->>>>>>> b48b575df439eb733ffd46c76445b50165a42b6d
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
