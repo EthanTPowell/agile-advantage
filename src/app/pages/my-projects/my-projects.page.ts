@@ -73,7 +73,9 @@ export class MyProjectsPage implements OnInit {
     this.user.projectId = project.id;
     this.userDataService.update(this.user).then(res => {
       this.router.navigateByUrl('/pages/tabs');
+      
     })
+    this.modalController.dismiss();
   }
 
   async addProject() {

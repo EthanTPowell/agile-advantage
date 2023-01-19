@@ -41,6 +41,7 @@ export class ProjectItemAddComponent implements OnInit {
   public images: string[] = [];
   public viewImage;
   public viewUsername;
+  public project: ProjectDto;
 
 
 
@@ -108,6 +109,10 @@ export class ProjectItemAddComponent implements OnInit {
       }
     });
 
+    this.projectDataService.getOne(this.user.projectId).subscribe((project) => {
+      this.project = project;
+    })
+
     this.userDataService.getDevelopers().subscribe((developers) => {
       this.developers = developers;
     });
@@ -167,19 +172,26 @@ export class ProjectItemAddComponent implements OnInit {
 
   selectType() {
     this.appDataService.selectType().then((response) => {
-      this.projectItem.Type = response;
+      if (response) {
+        this.projectItem.Type = response;
+        
+      }
     })
   };
 
   selectPriority() {
     this.appDataService.selectPriority().then((response) => {
-      this.projectItem.Priority = response;
+      if(response){
+        this.projectItem.Priority = response;
+      }
     })
   };
 
   selectStatus() {
     this.appDataService.selectStatus().then((response) => {
-      this.projectItem.Status = response;
+      if(response){
+        this.projectItem.Status = response;
+      }
     })
   };
 
@@ -200,8 +212,22 @@ export class ProjectItemAddComponent implements OnInit {
 
   selectDeveloper() {
     this.appDataService.selectDeveloper(this.developers).then((response) => {
-      if(response){
+      if (response === null) {
         this.projectItem.Assignee = response;
+      }
+      else if(response){
+        this.projectItem.Assignee = response;
+      }
+    })
+  };
+  
+  selectEpic() {
+    this.appDataService.selectEpic(this.project).then((response) => {
+      if (response === null) {
+        this.projectItem.Epic = response;
+      }
+      else if(response){
+        this.projectItem.Epic = response;
       }
     })
   };

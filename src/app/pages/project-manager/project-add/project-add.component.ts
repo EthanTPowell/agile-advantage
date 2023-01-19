@@ -26,7 +26,7 @@ export class ProjectAddComponent implements OnInit {
   public project: ProjectDto = ProjectModel.emptyDto();
   public user: UserDto = UserModel.emptyDto();
   public submitForm: FormGroup;
-  public url;
+  public url = '/assets/logo/android-chrome-192x192.png'
   public viewImage;
   public viewUsername;
   public postText;
@@ -76,27 +76,16 @@ export class ProjectAddComponent implements OnInit {
         Validators.minLength(3),
         Validators.maxLength(255),
       ])),
-      logo: new FormControl('', null),
-      ownerId: new FormControl(this.project.ownerId, Validators.compose([
-        Validators.required,
-      ])),
-      // stage: new FormControl(this.project.createId, Validators.compose([
-      //   Validators.required
-      // ])),
-      // prefix: new FormControl(this.project.prefix, Validators.compose([
+      logo: new FormControl(this.url, null),
+      // ownerId: new FormControl(this.project.ownerId, Validators.compose([
       //   Validators.required,
-      //   Validators.minLength(2),
-      //   Validators.maxLength(4),
       // ])),
-      // estType: new FormControl(this.project.estType, Validators.compose([
-      //   Validators.required
-      // ])),
-      start_at: new FormControl('', null),
-      end_at: new FormControl('', null),
-      users: new FormControl('', null)
+
+      // start_at: new FormControl('', null),
+      // end_at: new FormControl('', null),
+      // users: new FormControl('', null)
     });
 
-    console.log(this.project.ownerId, this.project.createId, this.project.prefix, this.project.estType)
 
     this.authenticationService.checkAuth().then((userAuth: any) => {
       if(userAuth) {
@@ -124,7 +113,7 @@ export class ProjectAddComponent implements OnInit {
     };
     this.project.users.push(this.user);
     this.projectDataService.create(this.project).then(res => {
-      this.modalController.dismiss();
+      this.modalController.dismiss(this.project.id);
     });
   }
 

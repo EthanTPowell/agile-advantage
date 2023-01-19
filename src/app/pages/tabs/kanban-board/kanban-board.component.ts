@@ -37,6 +37,7 @@ export class KanbanBoardComponent implements OnInit {
   @ViewChild('search') textBoxObj: TextBoxComponent;
   @ViewChild('kanban') kanbanObj: KanbanComponent;
   @ViewChild('dialogSettingsTemplate') dialogObj: DialogSettingsModel;
+  
   public swimlaneSettings: SwimlaneSettingsModel = {
     keyField: 'Assignee',
     allowDragAndDrop: true,

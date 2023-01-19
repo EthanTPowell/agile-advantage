@@ -60,6 +60,15 @@ export class ProjectUsersPage implements OnInit {
 
   save() {
     this.project.users = this.selectUsers;
+    this.project.users.forEach((user) => {
+      if (!user.projectId) {
+        
+        user.projectId = this.project.id;
+        this.userDataService.update(user).then((res) => {
+          
+        })
+      }
+    })
     this.projectDataService.update(this.project).then(res => {
       this.modalController.dismiss();
     });

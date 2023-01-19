@@ -40,7 +40,7 @@ export class ProjectItemEditComponent implements OnInit {
   public images: string[] = [];
   public viewImage;
   public viewUsername;
-
+  public project: ProjectDto = ProjectModel.emptyDto();
 
 
   public error_messages = {
@@ -92,11 +92,26 @@ export class ProjectItemEditComponent implements OnInit {
 
   ngOnInit() {
 
+    // this.authenticationService.checkAuth().then((userAuth:any) => {
+    //   if (userAuth) {
+    //     this.userDataService.getOne(userAuth.uid).subscribe((user) => {
+    //       this.user = user;
+
+    //     })
+    //   }
+    // })
+
+    this.user = this.navParams.data.user;
+
     this.userDataService.getDevelopers().subscribe((developers) => {
       this.developers = developers;
     });
 
     this.projectItem = this.navParams.data.projectItem;
+
+    this.projectDataService.getOne(this.user.projectId).subscribe((project) => {
+      this.project = project;
+    })
 
    }
   
@@ -106,19 +121,25 @@ export class ProjectItemEditComponent implements OnInit {
 
   selectType() {
     this.appDataService.selectType().then((response) => {
-      this.projectItem.Type = response;
+      if(response){
+        this.projectItem.Type = response;
+      }
     })
   };
 
   selectPriority() {
     this.appDataService.selectPriority().then((response) => {
-      this.projectItem.Priority = response;
+      if(response){
+        this.projectItem.Priority = response;
+      }
     })
   };
 
   selectStatus() {
     this.appDataService.selectStatus().then((response) => {
-      this.projectItem.Status = response;
+      if(response){
+        this.projectItem.Status = response;
+      }
     })
   };
 
@@ -139,7 +160,15 @@ export class ProjectItemEditComponent implements OnInit {
 
   selectDeveloper() {
     this.appDataService.selectDeveloper(this.developers).then((response) => {
-      this.projectItem.Assignee = response;
+      if (response === null) {
+        this.projectItem.Assignee = response;
+        this.projectItemDataService.update(this.projectItem);
+        
+      } else if (response) {
+        this.projectItem.Assignee = response;
+        this.projectItemDataService.update(this.projectItem);
+
+      }
     })
   };
 
@@ -158,5 +187,19 @@ export class ProjectItemEditComponent implements OnInit {
       }
     })
   }
+
+  selectEpic() {
+    this.appDataService.selectEpic(this.project).then((response) => {
+
+      if(response === null){
+        this.projectItem.Epic = response;
+        this.projectItemDataService.update(this.projectItem)
+      }
+      else if(response){
+        this.projectItem.Epic = response;
+        this.projectItemDataService.update(this.projectItem)
+      }
+    })
+  };
 
 }

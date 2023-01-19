@@ -48,22 +48,25 @@ export class AuthGuard implements CanActivate {
         if (logging) {
           this.authenticationService.checkAuth().then((userAuth: any) => {
             if (userAuth) {
-              this.userDataService.getOne(userAuth.uid).subscribe((user) => {
-                // console.log(user)
-                // return true;
-                if (user.firstTime) {
-                  this.router.navigateByUrl('/first-setup');
-                } else {
-                return true;
+              this.userDataService.getOne(userAuth.uid).subscribe(
+                (user) => {
+                  // console.log(user)
+                  // return true;
+                  if (user.firstTime) {
+                    this.router.navigateByUrl('/first-setup');
+                  } else {
+                    return true;
+                  }
+                },
+                (error) => {
+                  console.warn(error.responseText);
+                  console.log({ error });
+                  // if(error.error){
+                  //     this.snackBar.open(error.error, '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });
+                  // }
                 }
-            }, error => {
-              console.warn(error.responseText)
-              console.log({ error });
-              // if(error.error){
-              //     this.snackBar.open(error.error, '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 }); 
-              // }  
-          }); 
-                }
+              );
+            }
           });
           return true;
         } else if (!logging) {

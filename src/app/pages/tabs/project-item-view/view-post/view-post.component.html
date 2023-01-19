@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
       <ion-title>
-        Edit post 
+        View post 
       </ion-title>
     </ion-toolbar>
   </ion-header>
@@ -15,6 +15,7 @@
           <ion-item>
           {{projectItemPost.message}}
         </ion-item>
+        <ion-item></ion-item>
         <ion-item *ngIf="images.length > 0">
           <div *ngFor="let image of images">
               <ion-thumbnail>
@@ -27,6 +28,7 @@
               (click)="showImage(image)"></ion-icon>
           </div>
         </ion-item> 
+        
         </ion-card-content>
       </ion-card>
   </ion-content>

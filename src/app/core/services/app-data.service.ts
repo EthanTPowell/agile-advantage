@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Priority, Location, Status, Type } from '../models/app.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { ProjectDto } from '../models/project.model';
 
 @Injectable({
   providedIn: 'root'
@@ -188,14 +189,14 @@ export class AppDataService {
           text: 'Need Info',
           cssClass: 'secondary-color',
           data: {
-            action: 'Need info',
+            action: 'NeedInfo',
           },
         },
         {
           text: 'In Progress',
           cssClass: 'tertiary-color',
           data: {
-            action: 'In progress',
+            action: 'InProgress',
           },
         },
         {
@@ -297,6 +298,52 @@ export class AppDataService {
 
   public getKanBanStatus(): Observable<Status[]>{
     return this.http.get<Status[]>(this.url + 'kanban_status.json');
+  }
+
+  async selectEpic(project: ProjectDto) {
+    let myButtons: any[] = [];
+    let blank = {
+      text: 'No Epic',
+      cssClass: 'dark-color',
+      data: {
+        action: null,
+      },
+    };
+    myButtons.push(blank);
+
+    let cancel = {
+      text: 'Cancel',
+      role: 'cancel',
+      data: {
+        action: 'cancel',
+      },
+    };
+    myButtons.push(cancel);
+    project.epics.forEach(epic => {
+      console.log(epic);
+      let thisButton = 
+      {
+        text: epic.name,
+        cssClass: 'primary-color',
+        data: {
+          action: epic.name,
+        },
+      };
+      myButtons.push(thisButton);
+
+    })
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Select Epic',
+      buttons: myButtons,
+      backdropDismiss: false
+    });
+
+    await actionSheet.present();
+
+    const result = await actionSheet.onDidDismiss();
+    if(result.data?.action != 'cancel') {
+      return result.data.action;
+    }
   }
 
 

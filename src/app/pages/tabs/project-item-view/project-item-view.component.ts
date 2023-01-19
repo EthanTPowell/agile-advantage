@@ -13,6 +13,8 @@ import { ModalController } from '@ionic/angular';
 import { ProjectItemPostAddComponent } from './project-item-post-add/project-item-post-add.component';
 import { UtilService } from 'src/app/core/services/util.service';
 import { ProjectItemEditComponent } from './project-item-edit/project-item-edit.component';
+import { ProjectDto, ProjectModel } from 'src/app/core/models/project.model';
+import { ProjectDataService } from 'src/app/core/services/data-services/project-data.service';
 
 @Component({
   selector: 'app-project-item-view',
@@ -26,7 +28,8 @@ export class ProjectItemViewComponent implements OnInit {
   public user: UserDto = UserModel.emptyDto();
   public projectItem: ProjectItemDto = ProjectItemModel.emptyDto();
   public projectItemId: any;
-  public developers: UserDto[] = []
+  public developers: UserDto[] = [];
+  public project: ProjectDto = ProjectModel.emptyDto();
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -36,6 +39,8 @@ export class ProjectItemViewComponent implements OnInit {
     private appDataService: AppDataService,
     private modalController: ModalController,
     private utilService: UtilService,
+    private projectDataService: ProjectDataService,
+
 
   ) {}
 
@@ -44,7 +49,10 @@ export class ProjectItemViewComponent implements OnInit {
       if (userAuth) {
         this.userDataService.getOne(userAuth.uid).subscribe((user) => {
           this.user = user;
-          this.projectItemId = this.activatedRoute.snapshot.paramMap.get('id');;
+          this.projectDataService.getOne(this.user.projectId).subscribe((project) => {
+            this.project = project;
+          })
+          this.projectItemId = this.activatedRoute.snapshot.paramMap.get('id');
           this.projectItemDataService
             .getOne(this.projectItemId)
             .subscribe((item) => {
@@ -54,6 +62,8 @@ export class ProjectItemViewComponent implements OnInit {
       }
     });
 
+
+
     this.userDataService.getDevelopers().subscribe((developers) => {
       this.developers = developers;
     });
@@ -61,7 +71,7 @@ export class ProjectItemViewComponent implements OnInit {
 
   selectType() {
     this.appDataService.selectType().then(response => {
-      if (response) {
+    if (response) {
         
         this.projectItem.Type = response;
         this.projectItemDataService.update(this.projectItem).then(res => {
@@ -110,11 +120,34 @@ export class ProjectItemViewComponent implements OnInit {
 
   selectDeveloper() {
     this.appDataService.selectDeveloper(this.developers).then((response) => {
-      if(response){
+      if (response === null) {
+      this.projectItem.Assignee = response
+      this.projectItemDataService.update(this.projectItem).then(res => {
+          
+        })
+      }
+      else if(response){
       this.projectItem.Assignee = response
       this.projectItemDataService.update(this.projectItem).then(res => {
         
-      })}
+      })
+      }
+    })
+  };
+
+  selectEpic() {
+    console.log(`user:`, this.user)
+    console.log(`project:`, this.project)
+    this.appDataService.selectEpic(this.project).then((response) => {
+
+      if (response === null) {
+        this.projectItem.Epic = response;
+        this.projectItemDataService.update(this.projectItem)
+      }
+      else if(response){
+        this.projectItem.Epic = response;
+        this.projectItemDataService.update(this.projectItem)
+      }
     })
   };
 

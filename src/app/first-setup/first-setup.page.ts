@@ -19,6 +19,7 @@ import { ActionSheetController, ToastController } from '@ionic/angular';
 import { AppDataService } from '../core/services/app-data.service';
 import { ViewImageComponent } from '../pages/tabs/view-image/view-image.component';
 import { Router } from '@angular/router';
+import { MyProjectsPage } from '../pages/my-projects/my-projects.page';
 
 @Component({
   selector: 'app-first-setup',
@@ -124,23 +125,7 @@ export class FirstSetupPage implements OnInit {
         ])
       ),
       logo: new FormControl('', null),
-      // ownerId: new FormControl(this.project.ownerId, Validators.compose([
-      //   Validators.required,
-      // ])),
-      // stage: new FormControl(this.project.createId, Validators.compose([
-      //   Validators.required
-      // ])),
-      // prefix: new FormControl(this.project.prefix, Validators.compose([
-      //   Validators.required,
-      //   Validators.minLength(2),
-      //   Validators.maxLength(4),
-      // ])),
-      // estType: new FormControl(this.project.estType, Validators.compose([
-      //   Validators.required
-      // ])),
-      // start_at: new FormControl('', null),
-      // end_at: new FormControl('', null),
-      // users: new FormControl('', null)
+
     });
 
     this.userDataService.get().subscribe((users) => {
@@ -158,7 +143,11 @@ export class FirstSetupPage implements OnInit {
     modal.present();
 
     modal.onDidDismiss().then((data) => {
-      this.utilService.navigate('/pages');
+      if(data){
+        this.user.projectId = data.data;
+        this.user.firstTime = false;
+        this.utilService.navigate('/pages');
+      }
     });
   }
 
@@ -173,82 +162,6 @@ export class FirstSetupPage implements OnInit {
 
   toggleClick(): void {
     this.sidebar.show();
-  }
-
-  onSubmit() {
-    let date: any = new Date().toISOString();
-    if (this.url) {
-      this.project.logo = this.url;
-    }
-    this.user.projectId = this.project.id;
-    this.user.firstTime = false;
-    this.project.users.push(this.user);
-    this.user.updated_at = date;
-    this.project.createId = this.user.id;
-    this.project.ownerId = this.user.id;
-
-    this.projectDataService.create(this.project).then(
-      (res) => {
-        this.userDataService.update(this.user).then((res) => {
-          this.router.navigateByUrl('/pages/tabs/dashboard');
-        });
-      },
-      (err) => {
-        alert(`err: ${err}`);
-      }
-    );
-  }
-
-  async insertImage() {
-    const actionSheet = await this.actionSheetController.create({
-      header: 'Select Picture',
-      buttons: [
-        {
-          text: 'Camera',
-          icon: 'camera',
-          handler: () => {
-            this.postImage(true);
-          },
-        },
-        {
-          text: 'Gallery',
-          icon: 'images',
-          handler: () => {
-            this.postImage(false);
-          },
-        },
-        {
-          text: 'Cancel',
-          icon: 'help-circle',
-          role: 'cancel',
-          handler: () => {},
-        },
-      ],
-    });
-    await actionSheet.present();
-    this.ngOnInit();
-  }
-
-  async postImage(isCamera: boolean) {
-    let fileName = this.fsImageService.generateFilename();
-    if (isCamera) {
-      try {
-        const url = await this.fsImageService.postPictureCamera(fileName);
-        this.url = url.url;
-      } catch (err) {
-        console.error(`postImage err: ${err}`);
-      } finally {
-      }
-    } else {
-      let fileName = this.fsImageService.generateFilename();
-      try {
-        const url = await this.fsImageService.postPictureGallery(fileName);
-        this.url = url.url;
-      } catch (err) {
-        console.error(`postImage err: ${err}`);
-      } finally {
-      }
-    }
   }
 
   async showToast() {
@@ -287,5 +200,24 @@ export class FirstSetupPage implements OnInit {
 
   cancel() {
     this.closeClick();
+  }
+
+  async showProjects() {
+
+    this.user.firstTime = false;
+    this.userDataService.update(this.user).then((user) => {
+      
+    })
+
+    const modal = await this.modalController.create({
+      component: MyProjectsPage,
+      // leaveAnimation: myLeaveAnimation,
+      // enterAnimation: myEnterAnimation,
+      cssClass: 'modal-wrapper',
+      // componentProps: {
+    
+      // },
+    });
+    modal.present();
   }
 }
