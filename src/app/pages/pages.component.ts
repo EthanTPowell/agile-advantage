@@ -19,6 +19,7 @@ export class PagesComponent implements OnInit {
     { title: 'Logout', url: '/login', icon: 'log-out' },
     { title: 'Project Manager', url: '/pages/project-manager', icon: 'settings' },
     { title: 'My Projects', url: '/pages/my-projects', icon: 'bookmarks' },
+    { title: 'Profile', url: '/pages/profile', icon: 'person' },
     
   ];
 
