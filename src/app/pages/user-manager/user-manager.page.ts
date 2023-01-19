@@ -15,6 +15,7 @@ import { UserEditPage } from './user-edit/user-edit.page';
 export class UserManagerPage implements OnInit {
 
   public users: UserDto[] = []
+  public placeholder = '/assets/profile-placeholder.png'
   
   public searchTerm: string = '';
 

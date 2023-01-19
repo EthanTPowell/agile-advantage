@@ -2,9 +2,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project was created by Ethan Powell and is hosted and authenticated with Firebase. In addition, I used Firebase cloud storage. 
-
-The non-SQL database was made with angularfire and Firebase. I created services to interact with angularfire and manage my CRUD functions.
+This project was created by Ethan Powell and is hosted with firebase.
 
 This is an agile workflow management application with a grid view and kanban board which are both sortable and searchable with full drag and drop capabilities. A user can register and create projects then add more users to the projects once the users create an account.
 
@@ -30,8 +28,7 @@ The split view with the sidebar menu on the left was done by routing components 
 * [capacitor](https://capacitorjs.com/solution/angular)
 * [syncfusion angular components](https://ej2.syncfusion.com/angular/documentation/introduction)
 * [Date fns](https://date-fns.org/)
-* [Python conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
-* [Python JupyterLab](https://jupyter.org/)
+
 
 
 <!-- ROADMAP -->
@@ -50,18 +47,7 @@ The split view with the sidebar menu on the left was done by routing components 
  - Inviting users to sign up through an email link
  - track the development hours for project items to track developer productivity
 
-<!-- CONTRIBUTING -->
-## Contributing
-<!-- list of contributors and use github profile links  -->
-[Ethan Powell](https://github.com/EthanTPowell) 
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 <!-- LICENSE -->
  ## License
@@ -74,7 +60,8 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- list contributors with their linked-in profile -->
 [Ethan Powell](https://www.linkedin.com/in/ethan-t-powell/) 
 
+[Ethan Powell](https://github.com/EthanTPowell) 
 
 <!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
+<!-- ## Acknowledgements -->
 
