@@ -59,14 +59,21 @@
                     {{ error.message }}
                   </div>
                 </ng-container>
-              </div>
-  
-              <ion-item>
-                <ion-label position="stacked">Last Name</ion-label>
-                <ion-input type="text" formControlName="lastName" [(ngModel)]="user.lastName" name="lastName"
-                  autocomplete="family-name">
+              </div> 
+              <ion-item class="ion-margin-top">
+                <ion-label position="stacked">Phone Number:</ion-label>
+                <ion-input type="text" formControlName="mobileNo" [(ngModel)]="user.mobileNo" name="mobileNo"
+                  autocomplete="tel">
                 </ion-input>
-              </ion-item>  
+              </ion-item>
+              <div class="error-messages">
+                <ng-container *ngFor="let error of error_messages.mobileNo">
+                  <div class="error-message"
+                    *ngIf="submitForm.get('mobileNo').hasError(error.type) && (submitForm.get('mobileNo').dirty || submitForm.get('mobileNo').touched)">
+                    {{ error.message }}
+                  </div>
+                </ng-container>
+              </div> 
             </ion-col>
           </ion-row>
             <div class="spacer-1"></div>

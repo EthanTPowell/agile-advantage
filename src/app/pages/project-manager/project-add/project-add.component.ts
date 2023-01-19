@@ -26,7 +26,7 @@ export class ProjectAddComponent implements OnInit {
   public project: ProjectDto = ProjectModel.emptyDto();
   public user: UserDto = UserModel.emptyDto();
   public submitForm: FormGroup;
-  public url = '/assets/logo/android-chrome-192x192.png'
+  public url = '/assets/icon/android-chrome-192x192.png'
   public viewImage;
   public viewUsername;
   public postText;

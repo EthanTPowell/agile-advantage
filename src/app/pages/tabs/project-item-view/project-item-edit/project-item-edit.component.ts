@@ -92,15 +92,6 @@ export class ProjectItemEditComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.authenticationService.checkAuth().then((userAuth:any) => {
-    //   if (userAuth) {
-    //     this.userDataService.getOne(userAuth.uid).subscribe((user) => {
-    //       this.user = user;
-
-    //     })
-    //   }
-    // })
-
     this.user = this.navParams.data.user;
 
     this.userDataService.getDevelopers().subscribe((developers) => {

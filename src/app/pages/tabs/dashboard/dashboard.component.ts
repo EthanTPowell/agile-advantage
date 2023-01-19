@@ -36,25 +36,6 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.authenticationService.checkAuth().then((userAuth: any) => {
-    //   if (userAuth) {
-    //     this.userDataService.getOne(userAuth.uid).subscribe((user) => {
-    //       this.user = user;
-    //       this.projectId = user.projectId;
-
-    //       this.projectDataService.getOne(this.projectId).subscribe(
-    //         (project) => {
-    //           this.project = project;
-    //         },
-    //         (err) => {
-    //           console.log(`err: ${err}`);
-    //         }
-    //       );
-    //     });
-    //   }
-    // });
-
-    // ngOnInit() {
       this.authenticationService.checkAuth().then((userAuth: any) => {
         if(userAuth) {
           this.userDataService.getOne(userAuth.uid).pipe(tap(user => {

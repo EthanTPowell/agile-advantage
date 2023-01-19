@@ -34,7 +34,6 @@ export class FirstSetupPage implements OnInit {
   public target: string = 'content';
   public enablePersistence: boolean = true;
   public width: string = '580px';
-  // public zindex: string ='10';
   public position: string = 'Right';
   public closeOnDocumentClick: boolean = true;
 
@@ -99,14 +98,10 @@ export class FirstSetupPage implements OnInit {
         }, error => {
           console.warn(error.responseText)
           console.log({ error });
-          // if(error.error){
-          //     this.snackBar.open(error.error, '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 }); 
-          // }  
       }); 
       }
     });
 
-    // this.project = this.navParams.data.project;
     this.submitForm = this.formBuilder.group({
       name: new FormControl(
         this.project.name,

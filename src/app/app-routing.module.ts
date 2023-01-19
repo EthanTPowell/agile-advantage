@@ -1,14 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
-// import { EthanPowellPage } from './agile-advantage/agile-advantage.page';
 
 const routes: Routes = [
-  // {
-  //   path: 'home',
-  //   loadChildren: () =>
-  //     import('./home/home.module').then((m) => m.HomePageModule),
-  // },
   {
     path: '',
     redirectTo: 'pages',
@@ -20,14 +14,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/pages.module').then((m) => m.PagesModule),
   },
-  // {
-  //   path: 'agile-advantage',
-  //   // canActivate: [AuthGuard],
-  //   loadChildren: () =>
-  //     import('./agile-advantage/agile-advantage.module').then(
-  //       (m) => m.EthanPowellPageModule
-  //     ),
-  // },
   {
     path: 'login',
     loadChildren: () =>

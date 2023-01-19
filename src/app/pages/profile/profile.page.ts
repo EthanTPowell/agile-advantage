@@ -25,11 +25,11 @@ export class ProfilePage implements OnInit {
       { type: 'maxLength', message: 'First Name length must be lower or equal to 50 character.' },
       { type: 'pattern', message: 'Please enter a valid First Name' }
     ],
-    'lastName': [
-      { type: 'required', message: 'Last Name is required.' },
-      { type: 'minLength', message: 'Last Name length must be longer or equal to 6 character.' },
-      { type: 'maxLength', message: 'Last Name length must be lower or equal to 50 character.' },
-      { type: 'pattern', message: 'Please enter a valid Last Name' }
+    'mobileNo': [
+      // { type: 'required', message: 'Last Name is required.' },
+      { type: 'minLength', message: 'Last Name length must be equal to 10 characters.' },
+      // { type: 'maxLength', message: 'Last Name length must be lower or equal to 50 character.' },
+      { type: 'pattern', message: 'Please enter a valid phone number' }
     ],
   }
   
@@ -51,10 +51,10 @@ export class ProfilePage implements OnInit {
         Validators.minLength(1),
         Validators.maxLength(30),
       ])),
-      lastName: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.minLength(1),
-        Validators.maxLength(30),
+      mobileNo: new FormControl('', Validators.compose([
+        // Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(10),
       ])),
     });
 

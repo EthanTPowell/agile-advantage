@@ -29,27 +29,10 @@ export class AppComponent implements OnInit {
     public router: Router,
     private authenticationService: AuthenticationService,
     private userDataService: UserDataService,
-    private utilService: UtilService // private notificationService: NotificationService
+    private utilService: UtilService 
   ) {}
   ngOnInit(): void {
-    // this.authenticationService.checkAuth().then((userAuth: any) => {
-    //   if (userAuth) {
-    //     this.user$ = this.userDataService.getOne(userAuth.uid);
-    //     console.log(`pre-capacitor`);
-    //     // this.notificationService.web_listenMessages();
 
-    //     if (window.origin.includes("capacitor://")) {
-    //       console.log(`capacitor`);
-    //       // if(Capacitor.isNativePlatform()) {
-    //       // this.notificationService.cap_registerNotofocations().then(res => {
-    //       //   this.notificationService.cap_listeners(this.userId).then(res => {
-    //       //   });
-    //       // });
-    //       // } else {
-    //       // }
-    //     }
-    //   }
-    // });
 
     this.initializeApp();
   }
@@ -65,7 +48,6 @@ export class AppComponent implements OnInit {
   listenToLoginEvents() {
     this.events.subscribe("user:login", (data: any) => {
       this.user$ = this.userDataService.getOne(data.userId);
-      // window.location.reload();
 
       this.userDataService.getOne(data.userId).subscribe((user) => {
         this.user = user;
@@ -79,27 +61,12 @@ export class AppComponent implements OnInit {
       this.user$ = this.userDataService.getOne(data.userId);
       this.utilService.navigate('/pages/tabs', false);
 
-      // window.location.reload();
-      // this.userDataService.getOne(data.id).subscribe((user) => {
-      //   this.user = user;
-      //   // this.authenticationService.sendEmailVerification().then(res => {
-      //   //   console.log(`Email Verfication: ${res}`);
-      //   //   // if(window.origin.includes('capacitor://')) {
-      //   //   //   this.notificationService.cap_registerNotofocations();
-      //   //   //   this.notificationService.cap_listeners(this.user.id);
-      //   //   //   this.utilService.navigate("home", false);
-      //   //   // }
-      //   // });
-      // });
-      // this.ngOnInit();
+
     });
 
     this.events.subscribe("user:logout", (data: any) => {
-      // this.user = null;
       this.user$ = null;
-      // this.authenticationService.logout();
-      // this.utilService.navigate("login", false);
-      // this.ngOnInit();
+
     });
   }
 }

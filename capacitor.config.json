@@ -1,6 +1,6 @@
 {
-  "appId": "com.davesa.support",
-  "appName": "Davesa Support",
+  "appId": "com.agile.advantage",
+  "appName": "Agile-Advantage",
   "webDir": "www",
   "plugins": {
     "PushNotifications": {

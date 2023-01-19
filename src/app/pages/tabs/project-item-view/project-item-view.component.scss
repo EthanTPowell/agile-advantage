@@ -22,24 +22,6 @@ ion-content {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-
-  // button[ion-fab] {
-  //   overflow: visible;
-  //   position: relative;
-
-  //   ion-label {
-  //       position: absolute;
-  //       top: -8px;
-  //       right: 40px;
-
-  //       color: white;
-  //       background-color: rgba(0,0,0,0.7);
-  //       line-height: 24px;
-  //       padding: 4px 8px;
-  //       border-radius: 4px;
-  //   }
-  //   contain: layout;
-  // }
   
   ion-fab-button[data-desc] {
     position: relative;

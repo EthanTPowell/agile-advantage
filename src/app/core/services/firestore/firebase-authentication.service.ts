@@ -63,10 +63,6 @@ export class AuthenticationService {
 
     public createAccount(user: any): Promise<any> {
         return new Promise<any>((resolve, reject) => {
-            // this.userDataService.getByEmail(user.user.email).subscribe((userDto: UserDto[]) => {
-                // if(userDto[0]) {
-                //     this.util.presentToast("This email already exists", null, 'top', 3000);
-                // } else {
                     this.fireAuth.createUserWithEmailAndPassword(user.email, user.password)
                     .then(res => {
                         if (res.user) {
@@ -75,8 +71,6 @@ export class AuthenticationService {
                             userDto.id = res.user.uid;
                             userDto.email = user.email;
                             userDto.userName = user.userName;
-                            // userDto.firstName = user.firstName;
-                            // userDto.lastName = user.lastName;
                             this.userDataService.create(userDto).then(user => {
                                 this.events.publish('user:signup', {userDto});
                                 resolve(res.user);    
@@ -87,11 +81,6 @@ export class AuthenticationService {
                         this.authInfo$.next(AuthenticationService.UNKNOWN_USER);
                         reject(`creation failed ${err}`);
                     });
-                        
-                // }
-    
-            // });
-
         });
     }
 
@@ -122,7 +111,7 @@ export class AuthenticationService {
         return new Promise((resolve) => {
             this.fireAuth.onAuthStateChanged(user => {
                 resolve(user);
-             });
+            });
         });
     }
 

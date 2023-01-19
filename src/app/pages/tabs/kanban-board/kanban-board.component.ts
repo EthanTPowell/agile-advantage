@@ -107,7 +107,6 @@ export class KanbanBoardComponent implements OnInit {
           this.projectItemDataService
             .getProjectId(this.projectId)
             .subscribe((allProjectItems: ProjectItemDto[]) => {
-              // console.log(allProjectItems)
               this.data = allProjectItems;
             });
 
@@ -185,24 +184,18 @@ export class KanbanBoardComponent implements OnInit {
 
   dialogClose(args: DialogCloseEventArgs): void {
     console.log(args.data);
-    // console.log(`${JSON.stringify(args, null, 2)}`);
-    // this.kanbanObj.updateCard(args.data);
     this.projectItemDataService.update(args.data).then((res) => {
       console.log(args.data);
     });
-    // args.cancel = true;
   }
 
   onKanbanDragStop(args: DragEventArgs) {
-    // alert(`${JSON.stringify(args.event.target, null, 2)}`);
     let kanbanElement: Element = <Element>(
       closest(args.event.target as Element, '#kanban')
     );
     if (kanbanElement) {
-      // console.log(args.data);
       args.data.forEach((obj) => {
         try {
-          // this.kanbanObj.updateCard(obj);
           this.projectItemDataService.update(obj).then((res) => {
             console.log(args);
             this.kanbanObj.refresh();
@@ -211,18 +204,6 @@ export class KanbanBoardComponent implements OnInit {
           console.log(`error: ${error}`);
         }
       });
-
-      // this.kanbanObj.cardSettings.selectionType = 'None'
-      // this.kanbanObj.cardSettings.selectionType = 'Multiple'
-
-      // this.kanbanObj.updateCard(args.data[0]);
-
-      // this.projectItemDataService.update(args.data[0]).then(res => {
-      //   console.log(args.data);
-      // })
-      // console.log(`${JSON.stringify(this.kanbanObj, null, 2)}`);
-      // this.kanbanObj.deleteCard(args.data);
-      // this.kanbanObjB.addCard(args.data, args.dropIndex);
       args.cancel = true;
     }
   }

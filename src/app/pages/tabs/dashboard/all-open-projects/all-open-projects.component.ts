@@ -12,7 +12,6 @@ import { AuthenticationService } from 'src/app/core/services/firestore/firebase-
 import { UserDataService } from 'src/app/core/services/data-services/user-data.service';
 import { ProjectDataService } from 'src/app/core/services/data-services/project-data.service';
 import { ProjectDto, ProjectModel } from 'src/app/core/models/project.model';
-// import { SortByDatePipe, TimeAgoPipe } from 'src/app/core/pipes/pipes.module';
 import { TimeAgoPipe } from 'src/app/core/pipes/time-ago.pipe';
 import { SortByDatePipe } from 'src/app/core/pipes/sortByDate.pipe';
 

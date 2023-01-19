@@ -1,5 +1,4 @@
 ion-content {
-    // --background: linear-gradient(216deg, #18d4f4, #18d4f4);
     --background: linear-gradient(216deg, var(--ion-color-primary), var(--ion-color-primary-tint));
     background-size: 1800% 1800%;
     animation: rainbow 30s linear infinite;
@@ -18,40 +17,6 @@ ion-content {
     justify-content: center;
   }
   
- 
-  // .button-color {
-  //   background-color: var(--ion-color-mytheme);
-  // }
-  // .logo {
-  //   width: 1em !important;
-  // }
-  // .grid {
-  //   height: 100vh;
-  //   display: flex;
-  //   flex-direction: column;
-  //   justify-content: center;
-  // }
-  // .row {
-  //   display: flex;
-  //   flex-direction: row;
-  //   justify-content: center;
-  // }
-  // .img-logo {
-  //   height: 250px;
-  //   width: 250px;
-  // }
-  // .aa-logo {
-  //   display: flex;
-  //   flex-direction: column;
-  //   justify-content: center;
-  //   margin: 5px;
-  // }
-  // .btn-transition {
-  //   background: linear-gradient(to right, #FF8166 14%, #FF8166 96%);
-  // }
-  // .btn-color {
-  //   color: var(--ion-color-mytheme);
-  // }
   
   .error-messages {
     font-size: 0.7em;

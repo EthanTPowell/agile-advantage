@@ -50,8 +50,6 @@ export class AuthGuard implements CanActivate {
             if (userAuth) {
               this.userDataService.getOne(userAuth.uid).subscribe(
                 (user) => {
-                  // console.log(user)
-                  // return true;
                   if (user.firstTime) {
                     this.router.navigateByUrl('/first-setup');
                   } else {
@@ -61,9 +59,7 @@ export class AuthGuard implements CanActivate {
                 (error) => {
                   console.warn(error.responseText);
                   console.log({ error });
-                  // if(error.error){
-                  //     this.snackBar.open(error.error, '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });
-                  // }
+
                 }
               );
             }

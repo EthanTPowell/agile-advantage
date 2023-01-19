@@ -38,7 +38,6 @@ export class ProjectEpicsComponent implements OnInit {
     } else {
       this.epics = this.project.epics;    
     }
-    // this.epics = this.project.epics
   }
 
   onSubmit() {
@@ -59,7 +58,6 @@ export class ProjectEpicsComponent implements OnInit {
   }
 
   async addEpic() {
-    // console.log(`user: ${JSON.stringify(user, null, 2)}`)
       const { value, cancelled } = await Dialog.prompt({
         title: 'Epic',
         message: `Epic Name?`,

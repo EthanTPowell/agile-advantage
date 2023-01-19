@@ -98,18 +98,6 @@ export class FsImageService {
           });
         })).subscribe();
 
-        // this.angularDb.object('/users/' + userId).update({
-        //   imageUrl: success.url
-        // }).then(() => {
-        //   this.loading.hide();
-        //   this.showAlert('Profile', 'Your profile picture has been updated');
-        // }).catch(err => {
-        //   console.log(`imageUrl: ${JSON.stringify(err, null, 2)}`);
-        //   this.loading.hide();
-        //   this.showAlert('Profile', 'Your profile picture encountered an error');
-        //   return success;
-        // })
-
       }
     ).catch(err => {
       this.utilService.closeLoading();
@@ -174,7 +162,6 @@ export class FsImageService {
 
   //Delete the image given the url.
   deleteImage(downloadUrl) {
-    //var fileName = path.substring(path.lastIndexOf('%2F') + 3, path.lastIndexOf('?'));
     return this.afstorage.storage.refFromURL(downloadUrl).delete();
   }
 
