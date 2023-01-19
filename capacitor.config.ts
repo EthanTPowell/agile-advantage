@@ -2,9 +2,9 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
-  appName: 'agile-advantage',
+  appName: 'Davesa Support',
   webDir: 'www',
-  bundledWebRuntime: false,
+  bundledWebRuntime: false
 };
 
 export default config;

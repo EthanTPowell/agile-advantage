@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">My Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+  <ion-content>    
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-card *ngIf="user">
+      <ion-card-content>
+        <form [formGroup]="submitForm" (submit)="onSubmit()">
+          <div class="ion-padding" class="input">
+          <ion-row>
+            <ion-col size="6" size-sm="12" size-md="6" size-lg="6" size-xl="6">    
+              <p *ngIf="user" class="primary-color font-28">{{ user.userName }}</p>
+              <p class="font-18">{{ user.email }}</p>
+              <!-- <div id='element' *ngIf="user.imageUrl">
+                <span class="e-avatar e-avatar-xlarge">
+                  <img [src]="user.imageUrl" class="center" alt="image"/>
+                </span>
+              </div>
+              <div id='element' *ngIf="!user.imageUrl">
+                <span class="e-avatar e-avatar-xlarge">
+                  <img src="assets/profile.png" class="center" alt="image"/>
+                </span>
+              </div> -->
+              <div *ngIf="user.imageUrl">
+                <img [src]="user.imageUrl" class="center" alt="image" width="500"/>
+              </div>
+              <div *ngIf="!user.imageUrl">
+                <img src="assets/profile-placeholder.png" class="center" alt="image" width="500"/>
+              </div>
+              <ion-row>
+                <ion-col col-2>
+                  <ion-button shape="round" expand="full" color="primary" (click)="setProfilePicture()">Set Profile Image
+                  </ion-button>
+                </ion-col>
+              </ion-row>  
+            </ion-col>
+            <ion-col size="6" size-sm="12" size-md="6" size-lg="6" size-xl="6">    
+              <div class="font-w-500 font-24 primary-color">
+                Edit Profile
+              </div>
+              <ion-item class="ion-margin-top">
+                <ion-label position="stacked">Full Name</ion-label>
+                <ion-input type="text" formControlName="fullName" [(ngModel)]="user.userName" name="userName"
+                  autocomplete="name">
+                </ion-input>
+              </ion-item>
+              <div class="error-messages">
+                <ng-container *ngFor="let error of error_messages.fullName">
+                  <div class="error-message"
+                    *ngIf="submitForm.get('fullName').hasError(error.type) && (submitForm.get('fullName').dirty || submitForm.get('fullName').touched)">
+                    {{ error.message }}
+                  </div>
+                </ng-container>
+              </div>
+  
+              <ion-item>
+                <ion-label position="stacked">Last Name</ion-label>
+                <ion-input type="text" formControlName="lastName" [(ngModel)]="user.lastName" name="lastName"
+                  autocomplete="family-name">
+                </ion-input>
+              </ion-item>  
+            </ion-col>
+          </ion-row>
+            <div class="spacer-1"></div>
+            <ion-row class="ion-margin-top">
+              <ion-col col-2>
+                <ion-button shape="round" expand="full" type="submit" [disabled]="!submitForm.valid">
+                  Save
+                </ion-button>
+              </ion-col>
+            </ion-row>
+        </div>
+      </form>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>

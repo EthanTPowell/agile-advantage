@@ -1,0 +1,15 @@
+{
+  "appId": "com.davesa.support",
+  "appName": "Davesa Support",
+  "webDir": "www",
+  "plugins": {
+    "PushNotifications": {
+      "presentationOptions": [
+        "badge",
+        "sound",
+        "alert"
+      ]
+    }
+  }
+}
+

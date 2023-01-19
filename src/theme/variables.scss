@@ -60,7 +60,7 @@
   --ion-color-accent-shade: #CC1E0E;
   --ion-color-accent-tint: #660F07;
 
-
+    
   /** dark **/
   --ion-color-dark: #222428;
   --ion-color-dark-rgb: 34, 36, 40;
@@ -92,14 +92,14 @@
     --ion-color-firebase-contrast-rgb: 255, 255, 255;
     --ion-color-firebase-shade: #e69100;
     --ion-color-firebase-tint: #ffbe4d;
-
+  
       /** rose **/
     --ion-color-rose: #FF6079;
     --ion-color-header:#224068;
     --ion-color-rose-rgb: 34, 64, 104;
     --ion-color-rose-contrast: #ffffff;
     --ion-color-rose-contrast-rgb: 255, 255, 255;
-
+  
       /** profile **/
     --ion-color-profile: #f53d3d;
     --ion-color-profile-rgb: 245,61,61;
@@ -107,7 +107,7 @@
     --ion-color-profile-contrast-rgb: 255,255,255;
     --ion-color-profile-shade: #d83636;
     --ion-color-profile-tint: #f65050;
-
+  
     /** twitter **/
     --ion-color-twitter: #38A1F3;
     --ion-color-twitter-rgb: 56, 161, 243;
@@ -115,7 +115,7 @@
     --ion-color-twitter-contrast-rgb: 255, 255, 255;
     --ion-color-twitter-shade: #3171e0;
     --ion-color-twitter-tint: #4c8dff;
-
+  
     /** facebook **/
     --ion-color-facebook: #4267b2;
     --ion-color-facebook-rgb: 66, 103, 178;
@@ -123,6 +123,8 @@
     --ion-color-facebook-contrast-rgb: 255, 255, 255;
     --ion-color-facebook-shade: #3171e0;
     --ion-color-facebook-tint: #4c8dff;
+
+
 
 }
 
@@ -288,7 +290,7 @@
 
 // $font-family: 'Roboto', sans-serif;
 $font-family: 'Comfortaa', cursive;
-$toolbar-height: 56px;
+$toolbar-height: 56px; 
 $horizontal-menu-height: $toolbar-height;
 $tab-menu-height: $toolbar-height;
 
@@ -304,7 +306,7 @@ $box-height: 186px;
 $box-position: 34px;
 $register-box-height: 300px;
 
-$footer-height: 56px;
+$footer-height: 56px; 
 
 .bg-primary-50 {
   background-color: rgba(var(--ion-color-primary), .5);
