@@ -64,7 +64,7 @@ import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
     EditPostComponent,
     ViewPostComponent,
     DeletePostComponent,
-    ProjectItemEditComponent
+    ProjectItemEditComponent,
   ],
   providers: [
     EditService,
