@@ -1,5 +1,5 @@
 {
-  "name": "agile-advantage",
+  "name": "",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -19,11 +19,12 @@
     "@angular/forms": "^14.1.2",
     "@angular/platform-browser": "^14.2.2",
     "@angular/platform-browser-dynamic": "^14.1.2",
+    "@angular/pwa": "^0.5.3",
     "@angular/router": "^14.1.2",
     "@angular/service-worker": "^14.1.2",
     "@capacitor/action-sheet": "^4.0.1",
     "@capacitor/app": "4.0.1",
-    "@capacitor/camera": "^4.1.1",
+    "@capacitor/camera": "^4.1.4",
     "@capacitor/clipboard": "^4.0.1",
     "@capacitor/core": "4.2.0",
     "@capacitor/device": "^4.0.1",
@@ -49,6 +50,10 @@
     "firebase": "^9.9.0",
     "ionicons": "^6.0.3",
     "promise-polyfill": "^8.2.3",
+    "resolutions": {
+      "fs-capacitor": "^6.2.0",
+      "graphql-upload": "^11.0.0"
+    },
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "uuid": "^9.0.0",
