@@ -18,7 +18,9 @@
         <ion-item></ion-item>
         <ion-item *ngIf="images.length > 0">
           <div *ngFor="let image of images">
-              <ion-thumbnail>
+              <ion-thumbnail
+              (click)="showImage(image)"
+              >
                 <img [src]="image" alt="image" (click)="showImage(image)">
               </ion-thumbnail>  
               <ion-icon 

@@ -42,7 +42,9 @@
       <ion-row>
         <ion-item *ngIf="post.images.length > 0">
           <div *ngFor="let image of post.images">
-              <ion-thumbnail>
+              <ion-thumbnail
+              (click)="showImage(image)"
+              >
                 <img [src]="image" alt="image">
               </ion-thumbnail>  
                 <ion-icon 

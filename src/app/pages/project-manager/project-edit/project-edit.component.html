@@ -48,7 +48,8 @@
       <ion-item *ngIf="url">
         <ion-label position="stacked">Logo</ion-label>
 
-        <ion-thumbnail>
+        <ion-thumbnail
+        (click)="showImage(url)">
           <img [src]="url" alt="logo">
         </ion-thumbnail>  
         <ion-icon 
